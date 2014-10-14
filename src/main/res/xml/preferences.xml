@@ -19,6 +19,11 @@
                 android:entries="@array/currency_name"
                 android:entryValues="@array/currency_value"
                 android:defaultValue="€"/>
+        <EditTextPreference
+                android:key="currency_format"
+                android:summary="@string/preferences_formats_currency_format_summary"
+                android:title="@string/preferences_formats_currency_format"
+                android:defaultValue="# $"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

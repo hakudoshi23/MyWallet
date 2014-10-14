@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.haku.wallet.account.AccountDebtsFragment">
+      tools:context="com.haku.wallet.account.debt.AccountDebtsFragment">
     <item
             android:id="@+id/action_add"
             android:title="@string/debts_add"

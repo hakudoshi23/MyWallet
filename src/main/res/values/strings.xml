@@ -14,6 +14,8 @@
     <!-- ACCOUNT -->
     <string name="title_activity_account_data">Account Info</string>
     <string name="accounts_save">Save Account</string>
+    <string name="account_data_name">Account Name</string>
+    <string name="account_data_amount">Initial Amount</string>
 
     <!-- MOVES -->
     <string name="moves_add">Add Move</string>
@@ -36,5 +38,8 @@
     <string name="preferences_notifications_summary">Enable notifications for debts</string>
     <string name="preferences_formats">Formats</string>
     <string name="preferences_formats_currency">Default Currency</string>
+    <string name="preferences_formats_currency_format">Currency Display Format</string>
+    <string name="preferences_formats_currency_format_summary">Change the format to display currency values</string>
+    <string name="empty">Empty</string>
 
 </resources>

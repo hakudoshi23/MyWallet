@@ -7,7 +7,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +20,8 @@ import com.haku.wallet.settings.SettingsActivity;
 import com.haku.wallet.tag.TagsActivity;
 
 public class DrawerActivity extends FragmentActivity implements ListView.OnItemClickListener {
+    public static Account account = null;
+
     private ListView mDrawerList;
     private DrawerListAdapter mDrawerListAdapter;
     private RelativeLayout mDrawer;
@@ -69,14 +70,15 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
     }
 
     private void display(Account account) {
-        Fragment f = new AccountFragment(account);
+        DrawerActivity.account = account;
+        Fragment f = new AccountFragment();
         this.getSupportFragmentManager().beginTransaction().replace(R.id.content, f).commit();
         this.mDrawerLayout.closeDrawer(this.mDrawer);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.display(this.mDrawerListAdapter.getItem(0));
+        this.display(this.mDrawerListAdapter.getItem(position));
         this.mDrawerLayout.closeDrawer(this.mDrawer);
     }
 
@@ -94,7 +96,6 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("DRAWER", "Menu item selected: " + item.toString());
         if (this.mDrawerToggle.onOptionsItemSelected(item)) return true;
         return super.onOptionsItemSelected(item);
     }

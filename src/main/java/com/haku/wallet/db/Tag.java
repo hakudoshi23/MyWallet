@@ -2,8 +2,6 @@ package com.haku.wallet.db;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 
 public class Tag {
     public int _id;
@@ -23,23 +21,9 @@ public class Tag {
     }
 
     public static Tag[] getTags(Context context) {
-        Cursor c = SQLUtil.getDB(context).rawQuery("select * from tag", new String[]{});
+        Cursor c = SQLUtil.getDB(context).rawQuery("select t._id,t.name,c.value from tag t left join color c on t.color_id = c._id", new String[]{});
         Tag[] tags = new Tag[c.getCount()];
         while (c.moveToNext()) tags[c.getPosition()] = new Tag(c);
         return tags;
-    }
-
-    public static String getCreateStatement() {
-        return "create table tag (_id integer primary key autoincrement, name text, color integer);";
-    }
-
-    public static String getDeleteStatement() {
-        return "drop table if exists tag;";
-    }
-
-    public static void addDefaultData(SQLiteDatabase db) {
-        db.execSQL("insert into tag values(1, 'Party', " + Color.RED + ");");
-        db.execSQL("insert into tag values(2, 'Food', " + Color.BLUE + ");");
-        db.execSQL("insert into tag values(3, 'Games', " + Color.GREEN + ");");
     }
 }

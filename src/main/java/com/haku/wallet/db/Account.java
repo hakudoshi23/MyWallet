@@ -1,15 +1,15 @@
 package com.haku.wallet.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 public class Account {
     public final int _id;
     public String name;
     public float amount;
 
-    public Account(String name) {
+    public Account(String name, String amount) {
         this._id = 0;
         this.name = name;
         this.amount = 0;
@@ -28,16 +28,23 @@ public class Account {
         return accounts;
     }
 
-    public static String getCreateStatement() {
-        return "create table account (_id integer primary key autoincrement, name text, amount decimal);";
+    public static Account getAccount(Context context, int id) {
+        Cursor c = SQLUtil.getDB(context).rawQuery("select * from account a where a._id = " + id, new String[]{});
+        return c.moveToNext() ? new Account(c) : null;
     }
 
-    public static String getDeleteStatement() {
-        return "drop table if exists account;";
-    }
-
-    public static void addDefaultData(SQLiteDatabase db) {
-        db.execSQL("insert into account values(1, 'Pocket', 98.70);");
-        db.execSQL("insert into account values(2, 'Bank', 5642.23);");
+    public boolean save(Context context) {
+        ContentValues values = new ContentValues();
+        values.put("name", this.name);
+        values.put("amount", this.amount);
+        int count;
+        if (this._id > 0) {
+            count = SQLUtil.getDB(context).update("account", values, "_id = ?",
+                    new String[]{String.valueOf(this._id)});
+        } else {
+            long aux = SQLUtil.getDB(context).insert("account", null, values);
+            count = aux > 0 ? 1 : 0;
+        }
+        return count == 1;
     }
 }

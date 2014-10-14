@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import com.avp.wallet.R;
+import com.haku.wallet.db.Color;
 
 public class TagDataActivity extends Activity {
 
@@ -15,13 +16,12 @@ public class TagDataActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_data);
 
-        Spinner spinner = (Spinner) findViewById(R.id.activity_tag_data_color);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.color_id, android.R.layout.simple_spinner_item);
+        Spinner spinner = (Spinner) this.findViewById(R.id.activity_tag_data_color);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, Color.getColorNames(this));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
