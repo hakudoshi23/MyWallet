@@ -13,9 +13,9 @@ import java.util.Vector;
 
 public class TabHostPager extends FragmentPagerAdapter implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
 
+    private final List<Fragment> fragments = new Vector<Fragment>();
     private final FragmentTabHost tabs;
     private final ViewPager pager;
-    private List<Fragment> fragments = new Vector<Fragment>();
 
     public TabHostPager(FragmentManager fm, ViewPager pager, FragmentTabHost tabs, Fragment... fragments) {
         super(fm);

@@ -12,7 +12,7 @@ public class Account {
     public Account(String name, String amount) {
         this._id = 0;
         this.name = name;
-        this.amount = 0;
+        this.amount = Float.parseFloat(amount);
     }
 
     public Account(Cursor c) {
@@ -46,5 +46,14 @@ public class Account {
             count = aux > 0 ? 1 : 0;
         }
         return count == 1;
+    }
+
+    public boolean delete(Context context) {
+        int affected = 0;
+        if (this._id > 0) {
+            affected = SQLUtil.getDB(context).delete("account", "_id = ?",
+                    new String[]{String.valueOf(this._id)});
+        }
+        return affected == 1;
     }
 }

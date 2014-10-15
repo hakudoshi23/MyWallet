@@ -9,11 +9,14 @@ import android.widget.TextView;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Tag;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class TagListAdapter extends ArrayAdapter<Tag> {
     private final Context context;
 
-    public TagListAdapter(Context context, Tag[] objects) {
-        super(context, R.layout.tag_list_item, objects);
+    public TagListAdapter(Context context, Tag[] items) {
+        super(context, R.layout.tag_list_item, new ArrayList<Tag>(Arrays.asList(items)));
         this.context = context;
     }
 
@@ -26,5 +29,10 @@ public class TagListAdapter extends ArrayAdapter<Tag> {
         TextView colorView = (TextView) rowView.findViewById(R.id.tag_list_item_color);
         colorView.setBackgroundColor(this.getItem(position).color);
         return rowView;
+    }
+
+    public void updateAccounts(Tag... items) {
+        this.clear();
+        this.addAll(new ArrayList<Tag>(Arrays.asList(items)));
     }
 }

@@ -7,6 +7,8 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +41,7 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
         this.mDrawer = (RelativeLayout) this.findViewById(R.id.drawer);
 
         this.mDrawerListAdapter = new DrawerListAdapter(this, Account.getAccounts(this));
+        this.registerForContextMenu(this.mDrawerList);
         this.mDrawerList.setAdapter(this.mDrawerListAdapter);
         this.mDrawerList.setOnItemClickListener(this);
         this.mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -49,6 +52,25 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
         this.getActionBar().setHomeButtonEnabled(true);
 
         if (!this.mDrawerList.getAdapter().isEmpty()) this.display(this.mDrawerListAdapter.getItem(0));
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(R.string.account_action);
+        MenuInflater inflater = this.getMenuInflater();
+        inflater.inflate(R.menu.account_contextual, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            Account a = this.mDrawerListAdapter.getItem(info.position);
+            a.delete(this);
+            this.mDrawerListAdapter.updateAccounts(Account.getAccounts(this));
+        }
+        return true;
     }
 
     public void openAddAccount(View view) {
@@ -98,5 +120,11 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
     public boolean onOptionsItemSelected(MenuItem item) {
         if (this.mDrawerToggle.onOptionsItemSelected(item)) return true;
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        mDrawerListAdapter.updateAccounts(Account.getAccounts(this));
+        super.onResume();
     }
 }

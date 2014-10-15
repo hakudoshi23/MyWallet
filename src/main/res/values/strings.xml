@@ -41,5 +41,7 @@
     <string name="preferences_formats_currency_format">Currency Display Format</string>
     <string name="preferences_formats_currency_format_summary">Change the format to display currency values</string>
     <string name="empty">Empty</string>
+    <string name="delete">Delete</string>
+    <string name="account_action">Select Account Action</string>
 
 </resources>
