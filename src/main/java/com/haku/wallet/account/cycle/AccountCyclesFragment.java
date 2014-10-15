@@ -34,7 +34,8 @@ public class AccountCyclesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            Toast.makeText(this.getActivity(), "Cycles", Toast.LENGTH_SHORT);
+            Toast.makeText(this.getActivity(), "Cycles", Toast.LENGTH_SHORT).show();
+            ;
             return true;
         }
         return super.onOptionsItemSelected(item);

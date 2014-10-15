@@ -30,16 +30,21 @@ public class TagsActivity extends ListActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.account_action);
         MenuInflater inflater = this.getMenuInflater();
-        inflater.inflate(R.menu.account_contextual, menu);
+        inflater.inflate(R.menu.item_contextual, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if (item.getItemId() == R.id.delete) {
-            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             Tag t = this.mTagListAdapter.getItem(info.position);
             t.delete(this);
             this.mTagListAdapter.updateAccounts(Tag.getTags(this));
+        } else if (item.getItemId() == R.id.edit) {
+            Tag a = this.mTagListAdapter.getItem(info.position);
+            Intent i = new Intent(this, TagDataActivity.class);
+            i.putExtra("tag", a._id);
+            this.startActivity(i);
         }
         return true;
     }

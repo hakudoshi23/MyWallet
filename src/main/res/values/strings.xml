@@ -43,5 +43,6 @@
     <string name="empty">Empty</string>
     <string name="delete">Delete</string>
     <string name="account_action">Select Account Action</string>
+    <string name="edit">Edit</string>
 
 </resources>

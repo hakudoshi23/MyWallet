@@ -13,6 +13,7 @@ import com.haku.wallet.db.Tag;
 
 public class TagDataActivity extends Activity {
     private ArrayAdapter<CharSequence> adapter;
+    private Tag tag = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,14 @@ public class TagDataActivity extends Activity {
                 R.array.color_id, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        Bundle data = this.getIntent().getExtras();
+        if (data != null && data.containsKey("tag")) {
+            this.tag = Tag.getTag(this, data.getInt("tag"));
+            TextView nameView = (TextView) this.findViewById(R.id.activity_tag_data_name);
+            nameView.setText(tag.name);
+            spinner.setSelection(this.getColorIndex(this.tag.color));
+        }
     }
 
     @Override
@@ -40,7 +49,9 @@ public class TagDataActivity extends Activity {
             Spinner colorView = (Spinner) this.findViewById(R.id.activity_tag_data_color);
             int[] color_values = this.getResources().getIntArray(R.array.color_value);
             int color = color_values[colorView.getSelectedItemPosition()];
-            Tag tag = new Tag(nameView.getText().toString(), color);
+            if (this.tag == null) this.tag = new Tag();
+            this.tag.name = nameView.getText().toString();
+            this.tag.color = color;
             if (tag.save(this)) {
                 this.finish();
             } else {
@@ -49,5 +60,17 @@ public class TagDataActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private int getColorIndex(int color) {
+        int index = 0;
+        int[] colors = this.getResources().getIntArray(R.array.color_value);
+        for (int i = 0; i < colors.length; i++) {
+            if (colors[i] == color) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

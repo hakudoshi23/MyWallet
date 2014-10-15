@@ -9,23 +9,35 @@ public class Tag {
     public String name;
     public int color;
 
+    public Tag() {
+        this._id = 0;
+        this.color = -1;
+        this.name = "default";
+    }
+
     public Tag(String name, int color) {
         this._id = 0;
-        this.name = name;
         this.color = color;
+        this.name = name;
     }
 
     public Tag(Cursor c) {
         this._id = c.getInt(0);
-        this.name = c.getString(1);
-        this.color = c.getInt(2);
+        this.color = c.getInt(1);
+        this.name = c.getString(2);
     }
 
     public static Tag[] getTags(Context context) {
-        Cursor c = SQLUtil.getDB(context).rawQuery("select _id,name,color from tag", new String[]{});
+        Cursor c = SQLUtil.getDB(context).rawQuery("select * from tag", new String[]{});
         Tag[] tags = new Tag[c.getCount()];
         while (c.moveToNext()) tags[c.getPosition()] = new Tag(c);
         return tags;
+    }
+
+    public static Tag getTag(Context context, int id) {
+        Cursor c = SQLUtil.getDB(context).rawQuery("select * from tag where _id = ?",
+                new String[]{String.valueOf(id)});
+        return c.moveToNext() ? new Tag(c) : null;
     }
 
     public boolean save(Context context) {

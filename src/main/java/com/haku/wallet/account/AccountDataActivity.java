@@ -10,11 +10,21 @@ import com.avp.wallet.R;
 import com.haku.wallet.db.Account;
 
 public class AccountDataActivity extends Activity {
+    private Account account = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_data);
+        this.setContentView(R.layout.activity_account_data);
+
+        Bundle data = this.getIntent().getExtras();
+        if (data != null && data.containsKey("account")) {
+            this.account = Account.getAccount(this, data.getInt("account"));
+            TextView amountView = (TextView) this.findViewById(R.id.account_data_amount);
+            TextView nameView = (TextView) this.findViewById(R.id.account_data_name);
+            nameView.setText(account.name);
+            amountView.setText(String.valueOf(account.amount));
+        }
     }
 
 
@@ -30,8 +40,9 @@ public class AccountDataActivity extends Activity {
         if (id == R.id.action_settings) {
             TextView amountView = (TextView) this.findViewById(R.id.account_data_amount);
             TextView nameView = (TextView) this.findViewById(R.id.account_data_name);
-            Account account = new Account(nameView.getText().toString(),
-                    amountView.getText().toString());
+            if (this.account == null) this.account = new Account();
+            this.account.name = nameView.getText().toString();
+            this.account.amount = Float.parseFloat(amountView.getText().toString());
             if (account.save(this)) {
                 this.finish();
             } else {

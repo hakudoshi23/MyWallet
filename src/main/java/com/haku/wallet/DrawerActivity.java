@@ -22,8 +22,6 @@ import com.haku.wallet.settings.SettingsActivity;
 import com.haku.wallet.tag.TagsActivity;
 
 public class DrawerActivity extends FragmentActivity implements ListView.OnItemClickListener {
-    public static Account account = null;
-
     private ListView mDrawerList;
     private DrawerListAdapter mDrawerListAdapter;
     private RelativeLayout mDrawer;
@@ -59,16 +57,22 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.account_action);
         MenuInflater inflater = this.getMenuInflater();
-        inflater.inflate(R.menu.account_contextual, menu);
+        inflater.inflate(R.menu.item_contextual, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if (item.getItemId() == R.id.delete) {
-            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             Account a = this.mDrawerListAdapter.getItem(info.position);
             a.delete(this);
             this.mDrawerListAdapter.updateAccounts(Account.getAccounts(this));
+        } else if (item.getItemId() == R.id.edit) {
+            Account a = this.mDrawerListAdapter.getItem(info.position);
+            Intent i = new Intent(this, AccountDataActivity.class);
+            i.putExtra("account", a._id);
+            this.startActivity(i);
+            this.mDrawerLayout.closeDrawer(this.mDrawer);
         }
         return true;
     }
@@ -92,8 +96,10 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
     }
 
     private void display(Account account) {
-        DrawerActivity.account = account;
         Fragment f = new AccountFragment();
+        Bundle args = new Bundle();
+        args.putInt("account", account._id);
+        f.setArguments(args);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.content, f).commit();
         this.mDrawerLayout.closeDrawer(this.mDrawer);
     }

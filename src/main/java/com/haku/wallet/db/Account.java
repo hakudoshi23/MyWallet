@@ -9,6 +9,12 @@ public class Account {
     public String name;
     public float amount;
 
+    public Account() {
+        this._id = 0;
+        this.name = "default";
+        this.amount = 0f;
+    }
+
     public Account(String name, String amount) {
         this._id = 0;
         this.name = name;
