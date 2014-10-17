@@ -1,9 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.haku.wallet.tag.TagDataActivity">
-    <item
-            android:id="@+id/action_settings"
-            android:title="@string/tags_save"
-            android:icon="@drawable/ic_save"
-            android:showAsAction="always"/>
-</menu>

@@ -37,7 +37,7 @@ public class TagDataActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.getMenuInflater().inflate(R.menu.tag_data, menu);
+        this.getMenuInflater().inflate(R.menu.menu_save, menu);
         return true;
     }
 

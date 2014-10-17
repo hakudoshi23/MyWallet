@@ -16,14 +16,14 @@ public class TagListAdapter extends ArrayAdapter<Tag> {
     private final Context context;
 
     public TagListAdapter(Context context, Tag[] items) {
-        super(context, R.layout.tag_list_item, new ArrayList<Tag>(Arrays.asList(items)));
+        super(context, R.layout.list_item_tag, new ArrayList<Tag>(Arrays.asList(items)));
         this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.tag_list_item, parent, false);
+        View rowView = inflater.inflate(R.layout.list_item_tag, parent, false);
         TextView nameView = (TextView) rowView.findViewById(R.id.tag_list_item_name);
         nameView.setText(this.getItem(position).name);
         TextView colorView = (TextView) rowView.findViewById(R.id.tag_list_item_color);

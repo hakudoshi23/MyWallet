@@ -48,6 +48,18 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.haku.wallet.DrawerActivity"/>
         </activity>
+        <activity
+                android:name="com.haku.wallet.account.cycle.AccountCyclesDataActivity"
+                android:label="@string/title_activity_account_cycles_data">
+        </activity>
+        <activity
+                android:name="com.haku.wallet.account.debt.AccountDebtDataActivity"
+                android:label="@string/title_activity_account_debt_data">
+        </activity>
+        <activity
+                android:name="com.haku.wallet.account.move.AccountMoveDataActivity"
+                android:label="@string/title_activity_account_move_data">
+        </activity>
     </application>
 
 </manifest>

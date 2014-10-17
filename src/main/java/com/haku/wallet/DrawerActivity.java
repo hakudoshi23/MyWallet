@@ -63,11 +63,11 @@ public class DrawerActivity extends FragmentActivity implements ListView.OnItemC
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        if (item.getItemId() == R.id.delete) {
+        if (item.getItemId() == R.id.action_delete) {
             Account a = this.mDrawerListAdapter.getItem(info.position);
             a.delete(this);
             this.mDrawerListAdapter.updateAccounts(Account.getAccounts(this));
-        } else if (item.getItemId() == R.id.edit) {
+        } else if (item.getItemId() == R.id.action_edit) {
             Account a = this.mDrawerListAdapter.getItem(info.position);
             Intent i = new Intent(this, AccountDataActivity.class);
             i.putExtra("account", a._id);

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">MyWallet</string>
-
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="empty">Empty</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
     <!-- DRAWER -->
     <string name="drawer_open">Open Menu</string>
     <string name="drawer_close">Close Menu</string>
@@ -10,24 +13,21 @@
     <string name="add_account">ADD ACCOUNT</string>
     <string name="manage_tags">MANAGE TAGS</string>
     <string name="settings">SETTINGS</string>
-
     <!-- ACCOUNT -->
     <string name="title_activity_account_data">Account Info</string>
     <string name="accounts_save">Save Account</string>
     <string name="account_data_name">Account Name</string>
     <string name="account_data_amount">Initial Amount</string>
-
+    <string name="account_action">Select Account Action</string>
     <!-- MOVES -->
-    <string name="moves_add">Add Move</string>
+    <string name="title_activity_account_move_data">Move Info</string>
     <!-- DEBTS -->
-    <string name="debts_add">Add Debt</string>
+    <string name="title_activity_account_debt_data">Debt Info</string>
     <!-- CYCLES -->
-    <string name="cycles_add">Add Cycle</string>
+    <string name="title_activity_account_cycles_data">Cycle Info</string>
 
     <!-- TAGS -->
     <string name="title_activity_tag">Manage Tags</string>
-    <string name="tags_add">Add Tag</string>
-    <string name="tags_save">Save Tag</string>
     <string name="title_activity_tag_data">Tag Info</string>
     <string name="tag_data_name">Tag Name</string>
 
@@ -40,9 +40,8 @@
     <string name="preferences_formats_currency">Default Currency</string>
     <string name="preferences_formats_currency_format">Currency Display Format</string>
     <string name="preferences_formats_currency_format_summary">Change the format to display currency values</string>
-    <string name="empty">Empty</string>
-    <string name="delete">Delete</string>
-    <string name="account_action">Select Account Action</string>
-    <string name="edit">Edit</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
 
 </resources>

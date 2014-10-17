@@ -1,27 +1,24 @@
 package com.haku.wallet.account.move;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.*;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Move;
 
-public class AccountMovesFragment extends Fragment {
+public class AccountMovesFragment extends ListFragment {
+    private AccountMovesAdapter adapter;
+    private int account_id = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account_moves, container, false);
 
-        ListView list = (ListView) rootView.findViewById(android.R.id.list);
-        TextView empty = (TextView) rootView.findViewById(android.R.id.empty);
-        list.setEmptyView(empty);
-
         if (this.getArguments() != null && this.getArguments().containsKey("account")) {
-            list.setAdapter(new AccountMovesAdapter(this.getActivity(),
-                    Move.getByAccount(this.getActivity(), this.getArguments().getInt("account"))));
+            this.account_id = this.getArguments().getInt("account");
+            this.setListAdapter(new AccountMovesAdapter(this.getActivity(),
+                    Move.getByAccount(this.getActivity(), this.account_id)));
         }
 
         this.setHasOptionsMenu(true);
@@ -31,7 +28,7 @@ public class AccountMovesFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.moves, menu);
+        inflater.inflate(R.menu.menu_add, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -39,7 +36,9 @@ public class AccountMovesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            Toast.makeText(this.getActivity(), "Moves", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this.getActivity(), AccountMoveDataActivity.class);
+            i.putExtra("account", this.account_id);
+            this.getActivity().startActivity(i);
             return true;
         }
         return super.onOptionsItemSelected(item);

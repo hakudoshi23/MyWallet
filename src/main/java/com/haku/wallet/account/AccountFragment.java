@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
             mTabHost.setup(this.getActivity(), this.getChildFragmentManager(), R.id.fragment_account_content);
             mTabHost.addTab(mTabHost.newTabSpec("moves").setIndicator("Moves"), AccountMovesFragment.class, this.getArguments());
             mTabHost.addTab(mTabHost.newTabSpec("debts").setIndicator("Debts"), AccountDebtsFragment.class, this.getArguments());
-            mTabHost.addTab(mTabHost.newTabSpec("cycles").setIndicator("Cycles"), AccountCyclesFragment.class, this.getArguments());
+            mTabHost.addTab(mTabHost.newTabSpec("menu_add").setIndicator("Cycles"), AccountCyclesFragment.class, this.getArguments());
         }
 
         return rootView;

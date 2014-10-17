@@ -19,14 +19,14 @@ public class DrawerListAdapter extends ArrayAdapter<Account> {
     private final Activity activity;
 
     public DrawerListAdapter(Activity activity, Account... items) {
-        super(activity, R.layout.drawer_account_item, new ArrayList<Account>(Arrays.asList(items)));
+        super(activity, R.layout.drawer_item_account, new ArrayList<Account>(Arrays.asList(items)));
         this.activity = activity;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.drawer_account_item, parent, false);
+        View rowView = inflater.inflate(R.layout.drawer_item_account, parent, false);
         TextView nameView = (TextView) rowView.findViewById(R.id.drawer_account_item_name);
         nameView.setText(this.getItem(position).name);
         TextView amountView = (TextView) rowView.findViewById(R.id.drawer_account_item_amount);
