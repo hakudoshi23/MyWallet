@@ -27,11 +27,28 @@ public class Tag {
         this.name = c.getString(2);
     }
 
-    public static Tag[] getTags(Context context) {
-        Cursor c = SQLUtil.getDB(context).rawQuery("select * from tag", new String[]{});
-        Tag[] tags = new Tag[c.getCount()];
-        while (c.moveToNext()) tags[c.getPosition()] = new Tag(c);
-        return tags;
+    public static Cursor getTags(Context context) {
+        return SQLUtil.getDB(context).rawQuery("select _id,name,color from tag", new String[]{});
+    }
+
+    public static String[] getTagsString(Context context) {
+        Cursor c = SQLUtil.getDB(context).rawQuery("select name from tag", new String[]{});
+        String[] names = new String[c.getCount()];
+        for (int i = 0; i < c.getCount(); i++) {
+            c.moveToNext();
+            names[i] = c.getString(0);
+        }
+        return names;
+    }
+
+    public static int[] getTagsIds(Context context) {
+        Cursor c = SQLUtil.getDB(context).rawQuery("select _id from tag", new String[]{});
+        int[] names = new int[c.getCount()];
+        for (int i = 0; i < c.getCount(); i++) {
+            c.moveToNext();
+            names[i] = c.getInt(0);
+        }
+        return names;
     }
 
     public static Tag getTag(Context context, int id) {

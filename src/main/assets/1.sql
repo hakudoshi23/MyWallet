@@ -2,31 +2,20 @@ DROP TABLE IF EXISTS account;
 CREATE TABLE account (
   _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
+  currency TEXT NOT NULL,
   amount REAL NOT NULL DEFAULT '0'
 );
-INSERT INTO account VALUES (1,'Wallet',56.48),(2,'Desk',602.5),(3,'Bank',5954.32);
-
-DROP TABLE IF EXISTS cycle;
-CREATE TABLE cycle (
-  _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  tag_id INTEGER DEFAULT NULL,
-  name TEXT NOT NULL,
-  description TEXT DEFAULT NULL,
-  amount REAL NOT NULL DEFAULT '0',
-  period TEXT NOT NULL,
-  FOREIGN KEY (tag_id) REFERENCES tag (_id)
-);
-INSERT INTO cycle VALUES (1,3,'MasMobil','Phone contract',-6.05,'MONTHLY'),(2,3,'T-Jove','Train card for the next 3 months',-105,'MONTHLY');
+INSERT INTO account VALUES (1,'Wallet','€',56.48),(2,'Desk','€',602.5),(3,'Bank','$',5954.32);
 
 DROP TABLE IF EXISTS debt;
 CREATE TABLE debt (
   _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  cycle_id INTEGER DEFAULT NULL,
+  account_id INTEGER DEFAULT NULL,
   tag_id INTEGER DEFAULT NULL,
   name TEXT NOT NULL,
   description TEXT DEFAULT NULL,
   amount REAL NOT NULL DEFAULT '0',
-  FOREIGN KEY (cycle_id) REFERENCES cycle (_id),
+  FOREIGN KEY (account_id) REFERENCES account (_id),
   FOREIGN KEY (tag_id) REFERENCES tag (_id)
 );
 INSERT INTO debt VALUES (1,1,3,'MasMobil','Phone contract',-6.05),(2,2,3,'T-Jove','Train card for the next 3 months',-105);

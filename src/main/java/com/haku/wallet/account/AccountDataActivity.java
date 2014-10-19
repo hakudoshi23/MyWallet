@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.avp.wallet.R;
@@ -30,18 +31,20 @@ public class AccountDataActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.getMenuInflater().inflate(R.menu.account_data, menu);
+        this.getMenuInflater().inflate(R.menu.menu_save, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_save) {
             TextView amountView = (TextView) this.findViewById(R.id.account_data_amount);
             TextView nameView = (TextView) this.findViewById(R.id.account_data_name);
+            Spinner currencyView = (Spinner) this.findViewById(R.id.account_data_currency);
             if (this.account == null) this.account = new Account();
             this.account.name = nameView.getText().toString();
+            this.account.currency = currencyView.getSelectedItem().toString();
             this.account.amount = Float.parseFloat(amountView.getText().toString());
             if (account.save(this)) {
                 this.finish();

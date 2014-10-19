@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <Button
+            android:id="@+id/account_filter_tags"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="20sp"
+            android:hint="@string/tags"
+            android:gravity="center"/>
+
+    <LinearLayout
+            android:id="@+id/filter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/account_filter_tags"
+            android:weightSum="2">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/account_filter_from"
+                android:hint="@string/from"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/account_filter_to"
+                android:hint="@string/to"/>
+    </LinearLayout>
+
+    <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/menu_bottom"
+            android:layout_below="@+id/filter"/>
+
+    <TextView
+            android:id="@android:id/empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textColor="#AAA"
+            android:text="@string/empty"
+            android:layout_above="@+id/menu_bottom"
+            android:layout_below="@+id/filter"/>
+
+    <LinearLayout
+            android:id="@+id/menu_bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true">
+
+        <Button
+                android:id="@+id/fragment_account_move_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/export"/>
+
+        <Button
+                android:id="@+id/account_filter_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear"/>
+    </LinearLayout>
+</RelativeLayout>

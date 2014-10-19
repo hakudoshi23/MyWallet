@@ -7,31 +7,32 @@ import android.database.Cursor;
 public class Account {
     public final int _id;
     public String name;
+    public String currency;
     public float amount;
 
     public Account() {
         this._id = 0;
         this.name = "default";
+        this.name = "$";
         this.amount = 0f;
     }
 
-    public Account(String name, String amount) {
+    public Account(String name, String amount, String currency) {
         this._id = 0;
         this.name = name;
+        this.currency = currency;
         this.amount = Float.parseFloat(amount);
     }
 
     public Account(Cursor c) {
         this._id = c.getInt(0);
         this.name = c.getString(1);
-        this.amount = c.getFloat(2);
+        this.currency = c.getString(2);
+        this.amount = c.getFloat(3);
     }
 
-    public static Account[] getAccounts(Context context) {
-        Cursor c = SQLUtil.getDB(context).rawQuery("select * from account", new String[]{});
-        Account[] accounts = new Account[c.getCount()];
-        while (c.moveToNext()) accounts[c.getPosition()] = new Account(c);
-        return accounts;
+    public static Cursor getAccounts(Context context) {
+        return SQLUtil.getDB(context).rawQuery("select * from account", new String[]{});
     }
 
     public static Account getAccount(Context context, int id) {
@@ -39,10 +40,16 @@ public class Account {
         return c.moveToNext() ? new Account(c) : null;
     }
 
+    public static void delete(Context context, int id) {
+        SQLUtil.getDB(context).delete("account", "_id = ?",
+                new String[]{String.valueOf(id)});
+    }
+
     public boolean save(Context context) {
         ContentValues values = new ContentValues();
         values.put("name", this.name);
         values.put("amount", this.amount);
+        values.put("currency", this.currency);
         int count;
         if (this._id > 0) {
             count = SQLUtil.getDB(context).update("account", values, "_id = ?",
@@ -52,14 +59,5 @@ public class Account {
             count = aux > 0 ? 1 : 0;
         }
         return count == 1;
-    }
-
-    public boolean delete(Context context) {
-        int affected = 0;
-        if (this._id > 0) {
-            affected = SQLUtil.getDB(context).delete("account", "_id = ?",
-                    new String[]{String.valueOf(this._id)});
-        }
-        return affected == 1;
     }
 }

@@ -44,7 +44,7 @@ public class TagDataActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_save) {
             TextView nameView = (TextView) this.findViewById(R.id.activity_tag_data_name);
             Spinner colorView = (Spinner) this.findViewById(R.id.activity_tag_data_color);
             int[] color_values = this.getResources().getIntArray(R.array.color_value);

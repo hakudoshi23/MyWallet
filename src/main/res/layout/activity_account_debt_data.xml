@@ -11,22 +11,32 @@
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ntp_name" android:layout_alignParentTop="true" android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" android:hint="@string/name"/>
+            android:id="@+id/activity_account_move_data_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/name"/>
+
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/ntp_amount" android:layout_below="@+id/ntp_name" android:layout_alignParentStart="true"
-            android:layout_alignEnd="@+id/ntp_name" android:hint="@string/amount"/>
+            android:id="@+id/activity_account_move_data_amount"
+            android:layout_below="@+id/activity_account_move_data_name"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/activity_account_move_data_name"
+            android:hint="@string/amount"/>
+
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/ntp_description" android:layout_below="@+id/ntp_amount"
+            android:id="@+id/activity_account_move_data_description"
+            android:layout_below="@+id/activity_account_move_data_amount"
             android:layout_alignParentStart="true"
-            android:layout_alignEnd="@+id/ntp_amount" android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/activity_account_move_data_amount"
+            android:layout_alignParentBottom="true"
             android:hint="@string/description"/>
 </RelativeLayout>

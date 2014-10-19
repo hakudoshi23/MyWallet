@@ -1,38 +1,31 @@
 package com.haku.wallet.tag;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 import com.avp.wallet.R;
-import com.haku.wallet.db.Tag;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+public class TagListAdapter extends CursorAdapter {
 
-public class TagListAdapter extends ArrayAdapter<Tag> {
-    private final Context context;
-
-    public TagListAdapter(Context context, Tag[] items) {
-        super(context, R.layout.list_item_tag, new ArrayList<Tag>(Arrays.asList(items)));
-        this.context = context;
+    public TagListAdapter(Context context, Cursor cursor) {
+        super(context, cursor, true);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.list_item_tag, parent, false);
-        TextView nameView = (TextView) rowView.findViewById(R.id.tag_list_item_name);
-        nameView.setText(this.getItem(position).name);
-        TextView colorView = (TextView) rowView.findViewById(R.id.tag_list_item_color);
-        colorView.setBackgroundColor(this.getItem(position).color);
-        return rowView;
+        return inflater.inflate(R.layout.list_item_tag, parent, false);
     }
 
-    public void updateAccounts(Tag... items) {
-        this.clear();
-        this.addAll(new ArrayList<Tag>(Arrays.asList(items)));
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        TextView nameView = (TextView) view.findViewById(R.id.tag_list_item_name);
+        nameView.setText(cursor.getString(cursor.getColumnIndex("name")));
+        TextView colorView = (TextView) view.findViewById(R.id.tag_list_item_color);
+        colorView.setBackgroundColor(cursor.getInt(cursor.getColumnIndex("color")));
     }
 }

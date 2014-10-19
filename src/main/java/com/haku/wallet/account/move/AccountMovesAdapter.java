@@ -1,28 +1,44 @@
 package com.haku.wallet.account.move;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 import com.avp.wallet.R;
-import com.haku.wallet.db.Move;
+import com.haku.wallet.util.FormatUtil;
 
-public class AccountMovesAdapter extends ArrayAdapter<Move> {
-    private final Context context;
+public class AccountMovesAdapter extends CursorAdapter {
 
-    public AccountMovesAdapter(Context context, Move[] objects) {
-        super(context, R.layout.list_item_tag, objects);
-        this.context = context;
+    public AccountMovesAdapter(Context context, Cursor cursor) {
+        super(context, cursor, true);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.list_item_tag, parent, false);
-        TextView nameView = (TextView) rowView.findViewById(R.id.tag_list_item_name);
-        nameView.setText(this.getItem(position).name);
-        return rowView;
+        return inflater.inflate(R.layout.list_item_move, parent, false);
+    }
+
+    @Override
+    public void bindView(View view, final Context context, Cursor cursor) {
+        TextView nameView = (TextView) view.findViewById(R.id.move_list_item_name);
+        nameView.setText(cursor.getString(cursor.getColumnIndex("name")));
+
+        TextView colorView = (TextView) view.findViewById(R.id.move_list_item_tag_color);
+        colorView.setBackgroundColor(cursor.getInt(cursor.getColumnIndex("color")));
+
+        TextView descView = (TextView) view.findViewById(R.id.account_filter_tags);
+        String desc = cursor.getString(cursor.getColumnIndex("description"));
+        descView.setText(desc.length() > 25 ? desc.substring(0, 25) + "..." : desc);
+
+        TextView amountView = (TextView) view.findViewById(R.id.move_list_item_amount);
+        String amount = FormatUtil.format(context, cursor.getFloat(cursor.getColumnIndex("amount")),
+                cursor.getString(cursor.getColumnIndex("currency")));
+        amountView.setTextColor(amount.startsWith("+") ? Color.rgb(0, 153, 0) : Color.RED);
+        amountView.setText(amount);
     }
 }
