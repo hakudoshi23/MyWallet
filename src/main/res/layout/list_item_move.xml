@@ -7,17 +7,29 @@
         android:orientation="horizontal">
 
     <TextView
-            android:layout_width="20dp"
-            android:layout_height="fill_parent"
             android:id="@+id/move_list_item_tag_color"
+            android:layout_width="10dp"
+            android:layout_height="fill_parent"
             android:background="#000"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"/>
 
+    <ImageView
+            android:id="@+id/move_list_item_popup"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_overflow"
+            android:contentDescription="@string/popup"
+            android:layout_marginLeft="10dp"
+            android:cropToPadding="false"
+            />
+
     <TextView
+            android:id="@+id/move_list_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/move_list_item_name"
             android:layout_toEndOf="@+id/move_list_item_tag_color"
             android:textSize="20sp"
             android:layout_toStartOf="@+id/move_list_item_amount"
@@ -25,21 +37,10 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"/>
 
-    <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/move_list_item_popup"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/ic_overflow"
-            android:contentDescription="@string/popup"
-            android:layout_marginRight="10dp"
-            android:focusable="true"/>
-
     <TextView
+            android:id="@+id/account_list_item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/account_filter_tags"
             android:layout_alignEnd="@+id/move_list_item_name"
             android:textColor="#AAA"
             android:layout_below="@+id/move_list_item_name"
@@ -47,13 +48,23 @@
             android:textSize="14sp"/>
 
     <TextView
+            android:id="@+id/move_list_item_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/move_list_item_amount"
-            android:layout_alignTop="@+id/move_list_item_popup"
+            android:layout_alignTop="@+id/move_list_item_name"
             android:layout_toStartOf="@+id/move_list_item_popup"
-            android:layout_alignBottom="@+id/account_filter_tags"
+            android:layout_alignBottom="@+id/move_list_item_name"
             android:textSize="20sp"
             android:gravity="center"/>
+
+    <TextView
+            android:id="@+id/move_list_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#AAA"
+            android:textSize="14sp"
+            android:layout_alignBaseline="@+id/account_list_item_desc"
+            android:layout_toStartOf="@+id/move_list_item_popup"
+            android:layout_alignBottom="@+id/account_list_item_desc"/>
 
 </RelativeLayout>

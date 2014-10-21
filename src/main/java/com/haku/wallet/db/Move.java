@@ -29,7 +29,7 @@ public class Move {
 
     public static Cursor getByAccount(Context context, int account_id) {
         String query = "select m._id as _id,m.name as name,m.description as description," +
-                "m.amount as amount,a.currency as currency,t.color as color " +
+                "m.amount as amount,m.added as added,a.currency as currency,t.color as color " +
                 "from move m " +
                 "left join account a on m.account_id = a._id " +
                 "left join tag t on m.tag_id = t._id " +

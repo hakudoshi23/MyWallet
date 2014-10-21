@@ -6,7 +6,7 @@
                 android:layout_height="match_parent">
 
     <Button
-            android:id="@+id/account_filter_tags"
+            android:id="@+id/account_list_item_desc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
             android:id="@+id/filter"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/account_filter_tags"
+            android:layout_below="@+id/account_list_item_desc"
             android:weightSum="2">
 
         <Button

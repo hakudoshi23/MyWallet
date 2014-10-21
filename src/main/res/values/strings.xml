@@ -42,4 +42,6 @@
     <string name="to">To</string>
     <string name="tags">Tags</string>
     <string name="clear">Clear</string>
+    <string name="clone">Clone</string>
+    <string name="apply">Apply</string>
 </resources>

@@ -29,11 +29,13 @@ CREATE TABLE move (
   name TEXT NOT NULL,
   description TEXT DEFAULT NULL,
   amount REAL NOT NULL DEFAULT '0',
+  added INTEGER NOT NULL,
   FOREIGN KEY (account_id) REFERENCES account (_id),
   FOREIGN KEY (debt_id) REFERENCES debt (_id),
   FOREIGN KEY (tag_id) REFERENCES tag (_id)
 );
-INSERT INTO move VALUES (1,1,NULL,1,'Cocktail','Party hard!',-5.5),(2,3,1,3,'MasMobil','Phone contract',-6.05),(3,1,NULL,2,'Because','Weekend junk food',12.64),(4,2,2,3,'T-Jove','Train card for the next 3 months',-105);
+INSERT INTO move VALUES (1,1,NULL,1,'Cocktail','Party hard!',-5.5,1413833899),(2,3,1,3,'MasMobil','Phone contract',-6.05,1413833899),
+(3,1,NULL,2,'Because','Weekend junk food',12.64,1413833899),(4,2,2,3,'T-Jove','Train card for the next 3 months',-105,1413833899);
 
 DROP TABLE IF EXISTS tag;
 CREATE TABLE tag (

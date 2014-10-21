@@ -21,4 +21,15 @@ public class StringUtil {
         }
         return StringUtil.join(checked.toArray(new String[checked.size()]));
     }
+
+    public static String join(Integer... integers) {
+        StringBuffer sb = new StringBuffer();
+        if (integers.length > 0) {
+            sb.append(integers[0]);
+            for (int i = 1; i < integers.length; i++) {
+                sb.append(", ").append(integers[i]);
+            }
+        }
+        return sb.toString();
+    }
 }
