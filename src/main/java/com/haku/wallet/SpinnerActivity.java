@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CursorAdapter;
-import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.account.AccountDataActivity;
 import com.haku.wallet.account.AccountFragment;
@@ -28,7 +27,6 @@ public class SpinnerActivity extends FragmentActivity implements ActionBar.OnNav
         this.setContentView(R.layout.activity_spinner);
 
         this.spinnerAdapter = new AccountsSpinnerAdapter(this, Account.getAccounts(this));
-
         ActionBar bar = this.getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         bar.setListNavigationCallbacks(spinnerAdapter, this);
@@ -54,11 +52,15 @@ public class SpinnerActivity extends FragmentActivity implements ActionBar.OnNav
                 break;
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.delete_confirmation_title);
+                builder.setTitle(R.string.account_delete_confirmation_title);
                 builder.setPositiveButton(android.R.string.yes, this);
                 builder.setNegativeButton(android.R.string.no, null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                break;
+            case R.id.action_edit:
+                intent = new Intent(this, AccountDataActivity.class);
+                intent.putExtras(this.args);
                 break;
         }
         if (intent != null) this.startActivity(intent);
@@ -79,8 +81,6 @@ public class SpinnerActivity extends FragmentActivity implements ActionBar.OnNav
         if (this.args.containsKey("account")) {
             Account.delete(this, this.args.getInt("account"));
             this.spinnerAdapter.changeCursor(Account.getAccounts(this));
-        } else {
-            Toast.makeText(this, "No account selected!", Toast.LENGTH_SHORT).show();
         }
     }
 

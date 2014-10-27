@@ -8,6 +8,7 @@ public class Move {
     public final int _id;
     public int account_id;
     public int tag_id;
+    public long added;
     public String name;
     public String description;
     public float amount;
@@ -17,6 +18,7 @@ public class Move {
         this.account_id = 0;
         this.tag_id = 0;
         this.name = "default";
+        this.added = 0;
         this.name = null;
         this.amount = 0;
     }
@@ -45,6 +47,7 @@ public class Move {
     public boolean save(Context context) {
         ContentValues values = new ContentValues();
         values.put("name", this.name);
+        values.put("added", this.added);
         values.put("amount", this.amount);
         values.put("description", this.description);
         if (this.account_id > 0) values.put("account_id", this.account_id);

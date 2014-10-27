@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Tag;
 import com.haku.wallet.util.StringUtil;
@@ -92,24 +91,22 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                 builder.create().show();
                 break;
             case R.id.account_filter_from:
-                Toast.makeText(this.getActivity(), "From", Toast.LENGTH_SHORT).show();
                 dpDialog = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        from.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
-                        loader.setFrom(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
+                        from.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+                        loader.setFrom(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
                         requestUpdate();
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dpDialog.show();
                 break;
             case R.id.account_filter_to:
-                Toast.makeText(this.getActivity(), "To", Toast.LENGTH_SHORT).show();
                 dpDialog = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        to.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
-                        loader.setTo(String.format("%s/%s/%s", dayOfMonth, monthOfYear, year));
+                        to.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+                        loader.setTo(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
                         requestUpdate();
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));

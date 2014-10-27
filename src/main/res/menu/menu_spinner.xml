@@ -10,8 +10,13 @@
             android:icon="@drawable/ic_tags"
             android:showAsAction="never"/>
     <item
+            android:id="@+id/action_edit"
+            android:title="@string/accounts_edit"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:showAsAction="never"/>
+    <item
             android:id="@+id/action_delete"
-            android:title="@string/delete"
+            android:title="@string/accounts_delete"
             android:icon="@drawable/ic_delete"
             android:showAsAction="never"/>
 </menu>
