@@ -21,6 +21,14 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
     private SimpleCursorAdapter tagsCursor;
     private int account_id;
 
+    private TextView nameView;
+    private TextView amountView;
+    private TextView addedView;
+    private TextView descView;
+    private Spinner tagView;
+
+    private Move move = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +36,31 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
 
         this.findViewById(R.id.activity_account_move_data_added).setOnClickListener(this);
 
+        this.nameView = (TextView) this.findViewById(R.id.activity_account_move_data_name);
+        this.amountView = (TextView) this.findViewById(R.id.activity_account_move_data_amount);
+        this.addedView = (TextView) this.findViewById(R.id.activity_account_move_data_added);
+        this.descView = (TextView) this.findViewById(R.id.activity_account_move_data_description);
+        this.tagView = (Spinner) this.findViewById(R.id.activity_account_move_data_tag);
+
         Bundle args = this.getIntent().getExtras();
         if (args != null && args.containsKey("account")) {
             this.account_id = args.getInt("account");
             this.tagsCursor = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, Tag.getTags(this),
                     new String[]{"name"}, new int[]{android.R.id.text1}, 0);
-            Spinner tagView = (Spinner) this.findViewById(R.id.activity_account_move_data_tag);
-            tagView.setAdapter(this.tagsCursor);
+            this.tagView.setAdapter(this.tagsCursor);
+
+            if (args.containsKey("move")) {
+                int move_id = args.getInt("move");
+                this.move = Move.getMove(this, move_id);
+
+                this.nameView.setText(this.move.name);
+                this.amountView.setText(String.valueOf(this.move.amount));
+                this.addedView.setText(sdf.format(new Date(this.move.added)));
+                this.descView.setText(this.move.description);
+                this.tagView.setSelection(this.move.tag_id);
+
+                if (args.containsKey("clone") && args.getBoolean("clone")) this.move._id = 0;
+            }
         }
     }
 
@@ -49,26 +75,20 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            TextView nameView = (TextView) this.findViewById(R.id.activity_account_move_data_name);
-            TextView amountView = (TextView) this.findViewById(R.id.activity_account_move_data_amount);
-            TextView addedView = (TextView) this.findViewById(R.id.activity_account_move_data_added);
-            TextView descView = (TextView) this.findViewById(R.id.activity_account_move_data_description);
-            Spinner tagView = (Spinner) this.findViewById(R.id.activity_account_move_data_tag);
-
-            Move m = new Move();
             if (nameView.length() == 0) {
                 Toast.makeText(this, this.getString(R.string.empty_name), Toast.LENGTH_LONG).show();
             } else {
                 try {
-                    m.name = nameView.getText().toString();
+                    if(this.move == null) this.move = new Move();
+                    this.move.name = nameView.getText().toString();
                     String str_added = addedView.getText().toString();
-                    m.added = (str_added.equals("") ? new Date() : sdf.parse(str_added)).getTime();
-                    m.description = descView.getText().toString();
+                    this.move.added = (str_added.equals("") ? new Date() : sdf.parse(str_added)).getTime();
+                    this.move.description = descView.getText().toString();
                     String str_amount = amountView.getText().toString();
-                    m.amount = Float.parseFloat(str_amount.equals("") ? "0" : str_amount);
-                    m.tag_id = (int) this.tagsCursor.getItemId(tagView.getSelectedItemPosition());
-                    m.account_id = this.account_id;
-                    if (m.save(this)) this.finish();
+                    this.move.amount = Float.parseFloat(str_amount.equals("") ? "0" : str_amount);
+                    this.move.tag_id = (int) this.tagsCursor.getItemId(tagView.getSelectedItemPosition());
+                    this.move.account_id = this.account_id;
+                    if (this.move.save(this)) this.finish();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

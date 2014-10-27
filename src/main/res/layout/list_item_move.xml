@@ -21,10 +21,9 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/ic_overflow"
-            android:contentDescription="@string/popup"
             android:layout_marginLeft="10dp"
             android:cropToPadding="false"
-            />
+            android:contentDescription="@string/popup"/>
 
     <TextView
             android:id="@+id/move_list_item_name"

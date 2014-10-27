@@ -63,7 +63,7 @@
             android:layout_alignParentBottom="true">
 
         <Button
-                android:id="@+id/fragment_account_move_add"
+                android:id="@+id/account_filter_export"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

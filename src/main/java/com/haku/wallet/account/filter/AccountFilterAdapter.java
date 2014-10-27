@@ -47,7 +47,7 @@ public class AccountFilterAdapter extends CursorAdapter {
 
         TextView dateView = (TextView) view.findViewById(R.id.move_list_item_date);
         long added = cursor.getLong(cursor.getColumnIndex("added"));
-        dateView.setText(sdf.format(new Date(added * 1000)));
+        dateView.setText(sdf.format(new Date(added)));
 
         view.findViewById(R.id.move_list_item_popup).setVisibility(View.INVISIBLE);
         view.findViewById(R.id.move_list_item_popup).getLayoutParams().width = 0;

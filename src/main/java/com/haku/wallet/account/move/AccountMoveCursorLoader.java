@@ -17,6 +17,6 @@ public class AccountMoveCursorLoader extends CursorLoader {
 
     @Override
     public Cursor loadInBackground() {
-        return Move.getByAccount(this.context, this.account_id);
+        return Move.getMovesByAccount(this.context, this.account_id);
     }
 }

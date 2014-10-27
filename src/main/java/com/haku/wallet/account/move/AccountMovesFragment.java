@@ -29,7 +29,7 @@ public class AccountMovesFragment extends ListFragment implements View.OnClickLi
             rootView.findViewById(R.id.fragment_account_move_add).setOnClickListener(this);
             this.account_id = this.getArguments().getInt("account");
             this.adapter = new AccountMovesAdapter(this.getActivity(),
-                    Move.getByAccount(this.getActivity(), this.account_id));
+                    Move.getMovesByAccount(this.getActivity(), this.account_id));
             this.setListAdapter(this.adapter);
 
             this.updateList();

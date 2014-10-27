@@ -5,38 +5,58 @@ import android.content.Context;
 import android.database.Cursor;
 
 public class Move {
-    public final int _id;
+    public int _id;
     public int account_id;
     public int tag_id;
-    public long added;
     public String name;
     public String description;
     public float amount;
+    public long added;
 
     public Move() {
         this._id = 0;
         this.account_id = 0;
         this.tag_id = 0;
         this.name = "default";
-        this.added = 0;
-        this.name = null;
+        this.description = null;
         this.amount = 0;
+        this.added = 0;
     }
 
-    public Move(Cursor cursor) {
-        this._id = cursor.getInt(0);
-        this.name = cursor.getString(1);
-        this.amount = cursor.getFloat(2);
+    public Move(Cursor c) {
+        this._id = c.getInt(c.getColumnIndex("_id"));
+        this.account_id = c.getInt(c.getColumnIndex("account_id"));
+        this.tag_id = c.getInt(c.getColumnIndex("tag_id"));
+        this.name = c.getString(c.getColumnIndex("name"));
+        this.description = c.getString(c.getColumnIndex("description"));
+        this.amount = c.getInt(c.getColumnIndex("amount"));
+        this.added = c.getLong(c.getColumnIndex("added"));
     }
 
-    public static Cursor getByAccount(Context context, int account_id) {
+    public static Cursor getMovesByAccount(Context context, int account_id) {
         String query = "select m._id as _id,m.name as name,m.description as description," +
                 "m.amount as amount,m.added as added,a.currency as currency,t.color as color " +
                 "from move m " +
                 "left join account a on m.account_id = a._id " +
                 "left join tag t on m.tag_id = t._id " +
-                "where a._id = ?";
+                "where a._id = ? and m.added is not null";
         return SQLUtil.getDB(context).rawQuery(query, new String[]{String.valueOf(account_id)});
+    }
+
+    public static Cursor getDebtsByAccount(Context context, int account_id) {
+        String query = "select m._id as _id,m.name as name,m.description as description," +
+                "m.amount as amount,m.added as added,a.currency as currency,t.color as color " +
+                "from move m " +
+                "left join account a on m.account_id = a._id " +
+                "left join tag t on m.tag_id = t._id " +
+                "where a._id = ? and m.added is null";
+        return SQLUtil.getDB(context).rawQuery(query, new String[]{String.valueOf(account_id)});
+    }
+
+    public static Move getMove(Context context, int id) {
+        Cursor c = SQLUtil.getDB(context).rawQuery("select * from move a where a._id = ?",
+                new String[]{String.valueOf(id)});
+        return c.moveToNext() ? new Move(c) : null;
     }
 
     public static void delete(Context context, int id) {

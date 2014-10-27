@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Tag;
+import com.haku.wallet.util.ExportUtil;
 import com.haku.wallet.util.StringUtil;
 
 import java.util.ArrayList;
@@ -66,10 +67,11 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         DatePickerDialog dpDialog;
+        AlertDialog.Builder builder;
         Calendar c = Calendar.getInstance();
         switch (v.getId()) {
             case R.id.account_list_item_desc:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder = new AlertDialog.Builder(this.getActivity());
                 builder.setTitle(R.string.title_activity_tag)
                         .setMultiChoiceItems(this.names, this.checked,
                                 new DialogInterface.OnMultiChoiceClickListener() {
@@ -121,6 +123,19 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                 this.to.setText("");
                 this.loader.setTo(null);
                 this.requestUpdate();
+                break;
+            case R.id.account_filter_export:
+                builder = new AlertDialog.Builder(this.getActivity());
+                builder.setTitle(R.string.title_activity_tag)
+                        .setSingleChoiceItems(ExportUtil.Format.getNames(), -1,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ExportUtil.export(getActivity(), loader.loadInBackground(),
+                                                ExportUtil.Format.values()[which]);
+                                    }
+                                });
+                builder.create().show();
                 break;
         }
     }

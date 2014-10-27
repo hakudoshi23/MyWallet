@@ -10,6 +10,8 @@
     <string name="description">Description</string>
     <string name="amount">Amount</string>
     <string name="date">Date</string>
+    <string name="apply">Apply</string>
+    <string name="clone">Clone</string>
     <!-- SPINNER -->
     <string name="add_account">Add Account</string>
     <string name="manage_tags">Manage Tags</string>
@@ -26,27 +28,19 @@
     <!-- MOVES -->
     <string name="title_activity_account_move_data">Move Info</string>
     <string name="move_delete_confirmation_title">Delete Move?</string>
+    <string name="empty_name">Name cannot be empty!</string>
     <!-- DEBTS -->
     <string name="title_activity_account_debt_data">Debt Info</string>
-    <!-- CYCLES -->
-    <string name="title_activity_account_cycles_data">Cycle Info</string>
+    <!-- FILTER -->
+    <string name="export">Export</string>
+    <string name="tags">Tags</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="clear">Clear</string>
     <!-- TAGS -->
     <string name="title_activity_tag">Manage Tags</string>
     <string name="title_activity_tag_data">Tag Info</string>
     <string name="tag_data_name">Tag Name</string>
-    <!-- SETTINGS -->
-    <string name="title_activity_settings">Settings</string>
-    <string name="preferences_formats">Formats</string>
-    <string name="preferences_formats_currency">Default Currency</string>
-    <string name="preferences_formats_currency_format">Currency Format</string>
-    <string name="preferences_formats_number_format">Number Format</string>
-    <string name="export">Export</string>
     <string name="popup">popup</string>
-    <string name="from">From</string>
-    <string name="to">To</string>
-    <string name="tags">Tags</string>
-    <string name="clear">Clear</string>
-    <string name="clone">Clone</string>
-    <string name="apply">Apply</string>
-    <string name="empty_name">Name cannot be empty!</string>
+    <string name="send_to">Send To</string>
 </resources>
