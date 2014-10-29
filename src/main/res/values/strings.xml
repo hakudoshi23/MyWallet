@@ -37,6 +37,7 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="clear">Clear</string>
+    <string name="select_format">Select Format</string>
     <!-- TAGS -->
     <string name="title_activity_tag">Manage Tags</string>
     <string name="title_activity_tag_data">Tag Info</string>

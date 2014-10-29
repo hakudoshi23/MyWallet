@@ -4,42 +4,89 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import com.avp.wallet.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ExportUtil {
 
     public static void export(Context context, Cursor data, Format format) {
         Intent send = new Intent();
         send.setAction(Intent.ACTION_SEND);
-        send.putExtra(Intent.EXTRA_TEXT, "name,day,desc\nasd,1,asd");
-        send.setType("text/csv");
+        send.putExtra(Intent.EXTRA_TEXT, format.formatter.format(data));
+        send.setType("text/plain");
         context.startActivity(Intent.createChooser(send, context.getText(R.string.send_to)));
     }
 
     public enum Format {
-        XML("text/xml", new Formatter() {
+        XML(new Formatter() {
             @Override
             public String format(Cursor cursor) {
-                return null;
+                StringBuilder sb = new StringBuilder();
+                if (cursor != null && cursor.getCount() > 0) {
+                    int c_count = cursor.getColumnCount();
+                    sb.append("<moves>\n");
+                    while (cursor.moveToNext()) {
+                        sb.append("\t<move>\n");
+                        for (int i = 0; i < c_count; i++) {
+                            String name = cursor.getColumnName(i);
+                            sb.append(String.format("\t\t<%s>%s</%s>\n", name,
+                                    cursor.getString(i), name));
+                        }
+                        sb.append("\t</move>\n");
+                    }
+                    sb.append("</moves>\n");
+                }
+                return sb.toString();
             }
         }),
-        JSON("text/json", new Formatter() {
+        JSON(new Formatter() {
             @Override
             public String format(Cursor cursor) {
-                return null;
+                JSONArray array = new JSONArray();
+                if (cursor != null && cursor.getCount() > 0) {
+                    int c_count = cursor.getColumnCount();
+                    while (cursor.moveToNext()) {
+                        try {
+                            JSONObject object = new JSONObject();
+                            for (int i = 0; i < c_count; i++) {
+                                object.put(cursor.getColumnName(i), getValue(cursor, i));
+                            }
+                            array.put(object);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                return array.toString();
             }
         }),
-        CSV("text/csv", new Formatter() {
+        CSV(new Formatter() {
             @Override
             public String format(Cursor cursor) {
-                return null;
+                StringBuilder sb = new StringBuilder();
+                if (cursor != null && cursor.getCount() > 0) {
+                    int c_count = cursor.getColumnCount();
+                    for (int i = 0; i < c_count; i++) {
+                        sb.append(cursor.getColumnName(i) + ",");
+                    }
+                    sb.setLength(sb.length() - 1);
+                    sb.append("\n");
+                    while (cursor.moveToNext()) {
+                        for (int i = 0; i < c_count; i++) {
+                            sb.append(getValue(cursor, i) + ",");
+                        }
+                        sb.setLength(sb.length() - 1);
+                        sb.append("\n");
+                    }
+                }
+                return sb.toString();
             }
         });
 
-        public final String mimeType;
         public final Formatter formatter;
 
-        private Format(String mime, Formatter formatter) {
-            this.mimeType = mime;
+        private Format(Formatter formatter) {
             this.formatter = formatter;
         }
 
@@ -50,6 +97,19 @@ public class ExportUtil {
                 names[i] = formats[i].name();
             }
             return names;
+        }
+
+        private static Object getValue(Cursor c, int i) {
+            switch (c.getType(i)) {
+                case Cursor.FIELD_TYPE_STRING:
+                    return "'" + c.getString(i) + "'";
+                case Cursor.FIELD_TYPE_FLOAT:
+                    return c.getFloat(i);
+                case Cursor.FIELD_TYPE_INTEGER:
+                    return c.getInt(i);
+                default:
+                    return null;
+            }
         }
 
         public interface Formatter {

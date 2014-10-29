@@ -21,7 +21,7 @@ CREATE TABLE move (
 );
 INSERT INTO move VALUES (1,1,1,'Cocktail','Party hard!',-5.5,1413833899000),(2,3,3,'MasMobil','Phone contract',-6.05,1413833899000),
     (3,1,2,'Because','Weekend junk food',12.64,1413833899000),(4,2,3,'T-Jove','Train card for the next 3 months',-105,1413833899000),
-    (1,1,3,'MasMobil','Phone contract',-6.05, NULL),(2,2,3,'T-Jove','Train card for the next 3 months',-105, NULL);
+    (5,1,3,'MasMobil','Phone contract',-6.05, NULL),(6,2,3,'T-Jove','Train card for the next 3 months',-105, NULL);
 
 DROP TABLE IF EXISTS tag;
 CREATE TABLE tag (

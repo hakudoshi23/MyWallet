@@ -56,6 +56,7 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
             this.to = (Button) rootView.findViewById(R.id.account_filter_to);
             this.to.setOnClickListener(this);
             rootView.findViewById(R.id.account_filter_clear).setOnClickListener(this);
+            rootView.findViewById(R.id.account_filter_export).setOnClickListener(this);
 
             this.getLoaderManager().initLoader(CURSOR_LOADER, null, this);
         }
@@ -126,15 +127,16 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                 break;
             case R.id.account_filter_export:
                 builder = new AlertDialog.Builder(this.getActivity());
-                builder.setTitle(R.string.title_activity_tag)
-                        .setSingleChoiceItems(ExportUtil.Format.getNames(), -1,
+                builder.setTitle(R.string.select_format)
+                        .setItems(ExportUtil.Format.getNames(),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         ExportUtil.export(getActivity(), loader.loadInBackground(),
                                                 ExportUtil.Format.values()[which]);
                                     }
-                                });
+                                }
+                        );
                 builder.create().show();
                 break;
         }
