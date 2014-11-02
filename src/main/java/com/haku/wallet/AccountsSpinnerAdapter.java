@@ -10,10 +10,7 @@ import android.widget.TextView;
 import com.avp.wallet.R;
 import com.haku.wallet.util.FormatUtil;
 
-import java.text.DecimalFormat;
-
 public class AccountsSpinnerAdapter extends CursorAdapter {
-    private static final DecimalFormat df = new DecimalFormat("0.## €");
 
     public AccountsSpinnerAdapter(Context context, Cursor cursor) {
         super(context, cursor, true);
@@ -30,7 +27,7 @@ public class AccountsSpinnerAdapter extends CursorAdapter {
         TextView nameView = (TextView) view.findViewById(R.id.spinner_account_item_name);
         TextView amountView = (TextView) view.findViewById(R.id.spinner_account_item_amount);
         nameView.setText(cursor.getString(cursor.getColumnIndex("name")));
-        String amount = FormatUtil.format(context, cursor.getFloat(cursor.getColumnIndex("amount")),
+        String amount = FormatUtil.format(cursor.getFloat(cursor.getColumnIndex("amount")),
                 cursor.getString(cursor.getColumnIndex("currency")));
         amountView.setText(amount);
     }

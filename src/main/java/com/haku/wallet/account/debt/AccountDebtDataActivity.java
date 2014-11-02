@@ -24,9 +24,6 @@ public class AccountDebtDataActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_save) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_save || super.onOptionsItemSelected(item);
     }
 }

@@ -82,13 +82,13 @@ public class ExportUtil {
                 if (cursor != null && cursor.getCount() > 0) {
                     int c_count = cursor.getColumnCount();
                     for (int i = 0; i < c_count; i++) {
-                        sb.append(cursor.getColumnName(i) + ",");
+                        sb.append(cursor.getColumnName(i)).append(",");
                     }
                     sb.setLength(sb.length() - 1);
                     sb.append("\n");
                     while (cursor.moveToNext()) {
                         for (int i = 0; i < c_count; i++) {
-                            sb.append(getValue(cursor, i) + ",");
+                            sb.append(getValue(cursor, i)).append(",");
                         }
                         sb.setLength(sb.length() - 1);
                         sb.append("\n");

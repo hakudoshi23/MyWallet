@@ -37,7 +37,7 @@ public class SQLUtil extends SQLiteOpenHelper {
             AssetManager assets = this.getContext().getAssets();
             try {
                 InputStream is = assets.open(String.format("%s.sql", i));
-                for (String command : this.getSQLCommands(is, ';')) {
+                for (String command : this.getSQLCommands(is)) {
                     Log.d("SQLUtil", "Command: " + command);
                     db.execSQL(command);
                 }
@@ -54,7 +54,7 @@ public class SQLUtil extends SQLiteOpenHelper {
             AssetManager assets = this.getContext().getAssets();
             try {
                 InputStream is = assets.open(String.format("%s.sql", i));
-                for (String command : this.getSQLCommands(is, ';')) {
+                for (String command : this.getSQLCommands(is)) {
                     db.execSQL(command);
                 }
             } catch (IOException e) {
@@ -67,16 +67,16 @@ public class SQLUtil extends SQLiteOpenHelper {
         return this.context;
     }
 
-    public List<String> getSQLCommands(InputStream is, char delimiter) {
+    public List<String> getSQLCommands(InputStream is) {
         List<String> commands = new ArrayList<String>();
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Reader reader = new InputStreamReader(is);
         try {
             int aux = 0;
             while (aux != -1) {
                 aux = reader.read();
-                while (aux != delimiter && aux != -1) {
+                while (aux != ';' && aux != -1) {
                     sb.append((char) aux);
                     aux = reader.read();
                 }

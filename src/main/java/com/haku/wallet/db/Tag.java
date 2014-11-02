@@ -15,12 +15,6 @@ public class Tag {
         this.name = "default";
     }
 
-    public Tag(String name, int color) {
-        this._id = 0;
-        this.color = color;
-        this.name = name;
-    }
-
     public Tag(Cursor c) {
         this._id = c.getInt(0);
         this.color = c.getInt(1);

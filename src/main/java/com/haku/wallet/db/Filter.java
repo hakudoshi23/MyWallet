@@ -20,11 +20,11 @@ public class Filter {
         args.add(String.valueOf(account_id));
         if (from != null) {
             where += " and m.added >= ?";
-            args.add(String.valueOf(account_id));
+            args.add(Long.toString(from.getTime()));
         }
         if (to != null) {
             where += " and m.added <= ?";
-            args.add(Long.toString(from.getTime()));
+            args.add(Long.toString(to.getTime()));
         }
         if (tags != null && tags.length > 0) {
             where += " and t._id in (";

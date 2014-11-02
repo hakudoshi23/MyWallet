@@ -48,7 +48,7 @@ public class AccountMovesAdapter extends CursorAdapter {
         descView.setText(desc.length() > 25 ? desc.substring(0, 25) + "..." : desc);
 
         TextView amountView = (TextView) view.findViewById(R.id.move_list_item_amount);
-        String amount = FormatUtil.format(context, cursor.getFloat(cursor.getColumnIndex("amount")),
+        String amount = FormatUtil.format(cursor.getFloat(cursor.getColumnIndex("amount")),
                 cursor.getString(cursor.getColumnIndex("currency")));
         amountView.setTextColor(amount.startsWith("+") ? Color.rgb(0, 153, 0) : Color.RED);
         amountView.setText(amount);

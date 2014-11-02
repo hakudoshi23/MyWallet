@@ -17,13 +17,6 @@ public class Account {
         this.amount = 0f;
     }
 
-    public Account(String name, String amount, String currency) {
-        this._id = 0;
-        this.name = name;
-        this.currency = currency;
-        this.amount = Float.parseFloat(amount);
-    }
-
     public Account(Cursor c) {
         this._id = c.getInt(0);
         this.name = c.getString(1);

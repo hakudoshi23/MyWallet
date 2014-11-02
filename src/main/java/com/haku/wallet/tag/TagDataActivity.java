@@ -12,7 +12,6 @@ import com.avp.wallet.R;
 import com.haku.wallet.db.Tag;
 
 public class TagDataActivity extends Activity {
-    private ArrayAdapter<CharSequence> adapter;
     private Tag tag = null;
 
     @Override
@@ -21,7 +20,7 @@ public class TagDataActivity extends Activity {
         setContentView(R.layout.activity_tag_data);
 
         Spinner spinner = (Spinner) this.findViewById(R.id.activity_tag_data_color);
-        this.adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.color_id, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

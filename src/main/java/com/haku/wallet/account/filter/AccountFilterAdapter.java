@@ -23,7 +23,7 @@ public class AccountFilterAdapter extends CursorAdapter {
     public Integer tags[];
 
     public AccountFilterAdapter(Context context, int account_id) {
-        super(context, Filter.find(context, account_id, null, null, null), false);
+        super(context, Filter.find(context, account_id, null, null), false);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AccountFilterAdapter extends CursorAdapter {
         descView.setText(desc.length() > 25 ? desc.substring(0, 25) + "..." : desc);
 
         TextView amountView = (TextView) view.findViewById(R.id.move_list_item_amount);
-        String amount = FormatUtil.format(context, cursor.getFloat(cursor.getColumnIndex("amount")),
+        String amount = FormatUtil.format(cursor.getFloat(cursor.getColumnIndex("amount")),
                 cursor.getString(cursor.getColumnIndex("currency")));
         amountView.setTextColor(amount.startsWith("+") ? Color.rgb(0, 153, 0) : Color.RED);
         amountView.setText(amount);
@@ -73,7 +73,7 @@ public class AccountFilterAdapter extends CursorAdapter {
 
     public void setTo(String date) {
         try {
-            this.from = date == null ? null : sdf.parse(date);
+            this.to = date == null ? null : sdf.parse(date);
         } catch (ParseException ex) {
             Log.e("FilterCursorLoader", "Error: Parsing TO date!");
             ex.printStackTrace(System.err);
