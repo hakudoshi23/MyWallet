@@ -29,7 +29,7 @@ public class Move {
         this.tag_id = c.getInt(c.getColumnIndex("tag_id"));
         this.name = c.getString(c.getColumnIndex("name"));
         this.description = c.getString(c.getColumnIndex("description"));
-        this.amount = c.getInt(c.getColumnIndex("amount"));
+        this.amount = c.getFloat(c.getColumnIndex("amount"));
         this.added = c.getLong(c.getColumnIndex("added"));
     }
 

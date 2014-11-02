@@ -12,12 +12,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.avp.wallet.R;
+import com.haku.wallet.db.Move;
 import com.haku.wallet.util.FormatUtil;
 
 public class AccountDebtsAdapter extends CursorAdapter {
 
-    public AccountDebtsAdapter(Context context, Cursor cursor) {
-        super(context, cursor, true);
+    public AccountDebtsAdapter(Context context, int account_id) {
+        super(context, Move.getDebtsByAccount(context, account_id), true);
     }
 
     @Override
@@ -46,6 +47,10 @@ public class AccountDebtsAdapter extends CursorAdapter {
 
         this.addPopup(context, view.findViewById(R.id.move_list_item_popup),
                 cursor.getInt(cursor.getColumnIndex("_id")));
+    }
+
+    public void update(Context context, int account_id) {
+        this.swapCursor(Move.getDebtsByAccount(context, account_id));
     }
 
     private void addPopup(final Context context, final View parent, final int id) {

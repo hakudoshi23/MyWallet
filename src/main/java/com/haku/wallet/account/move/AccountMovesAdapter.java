@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Move;
 import com.haku.wallet.util.FormatUtil;
@@ -23,9 +22,11 @@ import java.util.Date;
 
 public class AccountMovesAdapter extends CursorAdapter {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private final int account_id;
 
-    public AccountMovesAdapter(Context context, Cursor cursor) {
-        super(context, cursor, true);
+    public AccountMovesAdapter(Context context, int account_id) {
+        super(context, Move.getMovesByAccount(context, account_id), true);
+        this.account_id = account_id;
     }
 
     @Override
@@ -60,6 +61,10 @@ public class AccountMovesAdapter extends CursorAdapter {
                 cursor.getInt(cursor.getColumnIndex("_id")));
     }
 
+    public void update(Context context, int account_id) {
+        this.swapCursor(Move.getMovesByAccount(context, account_id));
+    }
+
     private void addPopup(final Context context, final View parent, final int id) {
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,19 +76,19 @@ public class AccountMovesAdapter extends CursorAdapter {
                         Intent i;
                         switch (item.getItemId()) {
                             case R.id.action_edit:
-                                Toast.makeText(context, "EDIT " + id, Toast.LENGTH_SHORT).show();
                                 i = new Intent(context, AccountMoveDataActivity.class);
+                                i.putExtra("account", account_id);
                                 i.putExtra("move", id);
                                 context.startActivity(i);
                                 break;
                             case R.id.action_delete:
-                                Toast.makeText(context, "DELETE " + id, Toast.LENGTH_SHORT).show();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                 builder.setTitle(R.string.move_delete_confirmation_title);
                                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Move.delete(context, id);
+                                        update(context, account_id);
                                     }
                                 });
                                 builder.setNegativeButton(android.R.string.no, null);
@@ -91,8 +96,8 @@ public class AccountMovesAdapter extends CursorAdapter {
                                 dialog.show();
                                 break;
                             case R.id.action_clone:
-                                Toast.makeText(context, "CLONE " + id, Toast.LENGTH_SHORT).show();
                                 i = new Intent(context, AccountMoveDataActivity.class);
+                                i.putExtra("account", account_id);
                                 i.putExtra("move", id);
                                 i.putExtra("clone", true);
                                 context.startActivity(i);

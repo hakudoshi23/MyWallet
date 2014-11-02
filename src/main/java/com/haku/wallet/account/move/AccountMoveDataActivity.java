@@ -57,9 +57,17 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
                 this.amountView.setText(String.valueOf(this.move.amount));
                 this.addedView.setText(sdf.format(new Date(this.move.added)));
                 this.descView.setText(this.move.description);
-                this.tagView.setSelection(this.move.tag_id);
+                for (int i = 0; i < this.tagsCursor.getCount(); i++) {
+                    if (this.move.tag_id == this.tagsCursor.getItemId(i)) {
+                        this.tagView.setSelection(i);
+                        break;
+                    }
+                }
 
-                if (args.containsKey("clone") && args.getBoolean("clone")) this.move._id = 0;
+                if (args.containsKey("clone") && args.getBoolean("clone")) {
+                    this.addedView.setText(sdf.format(new Date()));
+                    this.move._id = 0;
+                }
             }
         }
     }
@@ -79,7 +87,7 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
                 Toast.makeText(this, this.getString(R.string.empty_name), Toast.LENGTH_LONG).show();
             } else {
                 try {
-                    if(this.move == null) this.move = new Move();
+                    if (this.move == null) this.move = new Move();
                     this.move.name = nameView.getText().toString();
                     String str_added = addedView.getText().toString();
                     this.move.added = (str_added.equals("") ? new Date() : sdf.parse(str_added)).getTime();

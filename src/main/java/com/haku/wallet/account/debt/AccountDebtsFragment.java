@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.avp.wallet.R;
-import com.haku.wallet.db.Move;
 
 public class AccountDebtsFragment extends ListFragment {
     private AccountDebtsAdapter adapter;
@@ -18,12 +17,17 @@ public class AccountDebtsFragment extends ListFragment {
 
         if (this.getArguments() != null && this.getArguments().containsKey("account")) {
             this.account_id = this.getArguments().getInt("account");
-            this.adapter = new AccountDebtsAdapter(this.getActivity(),
-                    Move.getDebtsByAccount(this.getActivity(), this.account_id));
+            this.adapter = new AccountDebtsAdapter(this.getActivity(), this.account_id);
             this.setListAdapter(this.adapter);
         }
 
         this.setHasOptionsMenu(true);
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        this.adapter.update(this.getActivity(), this.account_id);
+        super.onResume();
     }
 }

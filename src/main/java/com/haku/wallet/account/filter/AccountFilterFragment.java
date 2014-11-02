@@ -3,11 +3,8 @@ package com.haku.wallet.account.filter;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +19,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AccountFilterFragment extends ListFragment implements View.OnClickListener,
-        LoaderManager.LoaderCallbacks<Cursor> {
-    private static final int CURSOR_LOADER = 0x1;
+public class AccountFilterFragment extends ListFragment implements View.OnClickListener {
     public boolean[] checked = null;
     public String[] names = null;
     public int[] ids = null;
     public Button tags;
     public Button from;
     public Button to;
-    private AccountFilterCursorLoader loader;
     private AccountFilterAdapter adapter;
     private int account_id;
 
@@ -41,8 +35,7 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
 
         if (this.getArguments() != null && this.getArguments().containsKey("account")) {
             this.account_id = this.getArguments().getInt("account");
-            this.loader = new AccountFilterCursorLoader(this.getActivity(), this.account_id);
-            this.adapter = new AccountFilterAdapter(this.getActivity());
+            this.adapter = new AccountFilterAdapter(this.getActivity(), this.account_id);
             this.setListAdapter(this.adapter);
 
             this.names = Tag.getTagsString(this.getActivity());
@@ -57,8 +50,6 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
             this.to.setOnClickListener(this);
             rootView.findViewById(R.id.account_filter_clear).setOnClickListener(this);
             rootView.findViewById(R.id.account_filter_export).setOnClickListener(this);
-
-            this.getLoaderManager().initLoader(CURSOR_LOADER, null, this);
         }
 
         this.setHasOptionsMenu(true);
@@ -87,8 +78,8 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 tags.setText(StringUtil.join(names, checked));
-                                loader.setTags(getSelectedTagsId(ids, checked));
-                                requestUpdate();
+                                adapter.setTags(getSelectedTagsId(ids, checked));
+                                adapter.update(getActivity(), account_id);
                             }
                         });
                 builder.create().show();
@@ -98,8 +89,8 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         from.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
-                        loader.setFrom(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
-                        requestUpdate();
+                        adapter.setFrom(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+                        adapter.update(getActivity(), account_id);
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dpDialog.show();
@@ -109,8 +100,8 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         to.setText(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
-                        loader.setTo(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
-                        requestUpdate();
+                        adapter.setTo(String.format("%s/%s/%s", dayOfMonth, monthOfYear + 1, year));
+                        adapter.update(getActivity(), account_id);
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dpDialog.show();
@@ -118,12 +109,12 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
             case R.id.account_filter_clear:
                 for (int i = 0; i < this.checked.length; i++) this.checked[i] = false;
                 this.tags.setText("");
-                this.loader.setTags();
+                this.adapter.setTags();
                 this.from.setText("");
-                this.loader.setFrom(null);
+                this.adapter.setFrom(null);
                 this.to.setText("");
-                this.loader.setTo(null);
-                this.requestUpdate();
+                this.adapter.setTo(null);
+                this.adapter.update(this.getActivity(), this.account_id);
                 break;
             case R.id.account_filter_export:
                 builder = new AlertDialog.Builder(this.getActivity());
@@ -132,7 +123,7 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        ExportUtil.export(getActivity(), loader.loadInBackground(),
+                                        ExportUtil.export(getActivity(), adapter.getCursor(),
                                                 ExportUtil.Format.values()[which]);
                                     }
                                 }
@@ -148,30 +139,5 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
             if (isChecked[i]) checkedIds.add(ids[i]);
         }
         return checkedIds.toArray(new Integer[checkedIds.size()]);
-    }
-
-    private void requestUpdate() {
-        this.getLoaderManager().destroyLoader(CURSOR_LOADER);
-        this.getLoaderManager().restartLoader(CURSOR_LOADER, null, this);
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case CURSOR_LOADER:
-                return this.loader;
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        this.adapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        this.adapter.swapCursor(null);
     }
 }

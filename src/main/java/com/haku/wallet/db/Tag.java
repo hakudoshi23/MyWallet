@@ -57,6 +57,15 @@ public class Tag {
         return c.moveToNext() ? new Tag(c) : null;
     }
 
+    public static boolean delete(Context context, int id) {
+        int affected = 0;
+        if (id > 0) {
+            affected = SQLUtil.getDB(context).delete("tag", "_id = ?",
+                    new String[]{String.valueOf(id)});
+        }
+        return affected == 1;
+    }
+
     public boolean save(Context context) {
         ContentValues values = new ContentValues();
         values.put("name", this.name);
@@ -70,14 +79,5 @@ public class Tag {
             count = aux > 0 ? 1 : 0;
         }
         return count == 1;
-    }
-
-    public boolean delete(Context context) {
-        int affected = 0;
-        if (this._id > 0) {
-            affected = SQLUtil.getDB(context).delete("tag", "_id = ?",
-                    new String[]{String.valueOf(this._id)});
-        }
-        return affected == 1;
     }
 }

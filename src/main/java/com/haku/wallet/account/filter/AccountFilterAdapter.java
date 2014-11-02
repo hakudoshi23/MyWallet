@@ -3,22 +3,27 @@ package com.haku.wallet.account.filter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 import com.avp.wallet.R;
+import com.haku.wallet.db.Filter;
 import com.haku.wallet.util.FormatUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AccountFilterAdapter extends CursorAdapter {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public Date from = null, to = null;
+    public Integer tags[];
 
-    public AccountFilterAdapter(Context context) {
-        super(context, null, false);
+    public AccountFilterAdapter(Context context, int account_id) {
+        super(context, Filter.find(context, account_id, null, null, null), false);
     }
 
     @Override
@@ -51,5 +56,31 @@ public class AccountFilterAdapter extends CursorAdapter {
 
         view.findViewById(R.id.move_list_item_popup).setVisibility(View.INVISIBLE);
         view.findViewById(R.id.move_list_item_popup).getLayoutParams().width = 0;
+    }
+
+    public void update(Context context, int account_id) {
+        this.swapCursor(Filter.find(context, account_id, from, to, tags));
+    }
+
+    public void setFrom(String date) {
+        try {
+            this.from = date == null ? null : sdf.parse(date);
+        } catch (ParseException ex) {
+            Log.e("FilterCursorLoader", "Error: Parsing FROM date!");
+            ex.printStackTrace(System.err);
+        }
+    }
+
+    public void setTo(String date) {
+        try {
+            this.from = date == null ? null : sdf.parse(date);
+        } catch (ParseException ex) {
+            Log.e("FilterCursorLoader", "Error: Parsing TO date!");
+            ex.printStackTrace(System.err);
+        }
+    }
+
+    public void setTags(Integer... tags) {
+        this.tags = tags;
     }
 }

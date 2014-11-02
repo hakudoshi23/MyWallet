@@ -3,27 +3,19 @@ package com.haku.wallet.tag;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.avp.wallet.R;
-import com.haku.wallet.db.Tag;
 
 public class TagsActivity extends ListActivity {
-    private TagListAdapter mTagListAdapter;
+    private TagListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mTagListAdapter = new TagListAdapter(this, Tag.getTags(this));
-        this.registerForContextMenu(this.getListView());
-        this.setListAdapter(this.mTagListAdapter);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle(R.string.account_action);
-        MenuInflater inflater = this.getMenuInflater();
-        inflater.inflate(R.menu.menu_add, menu);
+        this.adapter = new TagListAdapter(this);
+        this.setListAdapter(this.adapter);
     }
 
     @Override
@@ -42,5 +34,11 @@ public class TagsActivity extends ListActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        adapter.update(this);
+        super.onResume();
     }
 }

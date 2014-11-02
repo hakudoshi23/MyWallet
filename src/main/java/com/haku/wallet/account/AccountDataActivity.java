@@ -23,8 +23,13 @@ public class AccountDataActivity extends Activity {
             this.account = Account.getAccount(this, data.getInt("account"));
             TextView amountView = (TextView) this.findViewById(R.id.account_data_amount);
             TextView nameView = (TextView) this.findViewById(R.id.account_data_name);
+            Spinner currencyView = (Spinner) this.findViewById(R.id.account_data_currency);
             nameView.setText(account.name);
             amountView.setText(String.valueOf(account.amount));
+            String[] currencies = this.getResources().getStringArray(R.array.currency);
+            for (int i = 0; i < currencies.length; i++) {
+                if (this.account.currency.equals(currencies[i])) currencyView.setSelection(i);
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="currency">
+    <string-array name="currency">
         <item>€</item>
         <item>$</item>
-    </array>
+    </string-array>
 </resources>

@@ -13,6 +13,7 @@ public class ExportUtil {
     public static void export(Context context, Cursor data, Format format) {
         Intent send = new Intent();
         send.setAction(Intent.ACTION_SEND);
+        data.moveToPosition(-1);
         send.putExtra(Intent.EXTRA_TEXT, format.formatter.format(data));
         send.setType("text/plain");
         context.startActivity(Intent.createChooser(send, context.getText(R.string.send_to)));
@@ -59,6 +60,19 @@ public class ExportUtil {
                     }
                 }
                 return array.toString();
+            }
+
+            private Object getValue(Cursor c, int i) {
+                switch (c.getType(i)) {
+                    case Cursor.FIELD_TYPE_STRING:
+                        return c.getString(i);
+                    case Cursor.FIELD_TYPE_FLOAT:
+                        return c.getFloat(i);
+                    case Cursor.FIELD_TYPE_INTEGER:
+                        return c.getInt(i);
+                    default:
+                        return null;
+                }
             }
         }),
         CSV(new Formatter() {

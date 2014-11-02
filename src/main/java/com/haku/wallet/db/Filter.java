@@ -16,7 +16,7 @@ public class Filter {
 
     public static Cursor find(Context context, int account_id, Date from, Date to, Integer... tags) {
         ArrayList<String> args = new ArrayList<String>();
-        String where = " where a._id = ?";
+        String where = " where a._id = ? and m.added not null";
         args.add(String.valueOf(account_id));
         if (from != null) {
             where += " and m.added >= ?";
