@@ -1,59 +1,74 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.haku.wallet.account.move.AccountMoveDataActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.haku.wallet.account.move.AccountMoveDataActivity">
 
-    <EditText
-            android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_height="wrap_content"
-            android:id="@+id/activity_account_move_data_name"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:hint="@string/name"
-            android:layout_toStartOf="@+id/activity_account_move_data_amount"/>
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
 
-    <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned|numberDecimal"
-            android:ems="10"
-            android:id="@+id/activity_account_move_data_amount"
-            android:hint="@string/amount"
-            android:layout_alignTop="@+id/activity_account_move_data_name"
-            android:layout_alignEnd="@+id/activity_account_move_data_description"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.haku.wallet.account.move.AccountMoveDataActivity">
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/activity_account_move_data_description"
-            android:hint="@string/description"
-            android:gravity="top"
-            android:layout_below="@+id/activity_account_move_data_added"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_account_move_data_name"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:hint="@string/name"
+                android:layout_toStartOf="@+id/activity_account_move_data_amount"/>
 
-    <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_account_move_data_tag"
-            android:layout_toEndOf="@+id/activity_account_move_data_amount"
-            android:layout_toStartOf="@+id/activity_account_move_data_amount"
-            android:layout_below="@+id/activity_account_move_data_name"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/activity_account_move_data_added"/>
+        <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned|numberDecimal"
+                android:ems="10"
+                android:id="@+id/activity_account_move_data_amount"
+                android:hint="@string/amount"
+                android:layout_alignTop="@+id/activity_account_move_data_name"
+                android:layout_alignEnd="@+id/activity_account_move_data_description"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_account_move_data_added"
-            android:layout_below="@+id/activity_account_move_data_amount"
-            android:layout_alignEnd="@+id/activity_account_move_data_amount"
-            style="@android:style/Widget.DeviceDefault.Light.Spinner"
-            android:hint="@string/date"
-            android:gravity="center"
-            android:layout_toEndOf="@+id/activity_account_move_data_name"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/activity_account_move_data_description"
+                android:hint="@string/description"
+                android:gravity="top"
+                android:layout_below="@+id/activity_account_move_data_added"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"/>
 
-</RelativeLayout>
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_account_move_data_tag"
+                android:layout_toEndOf="@+id/activity_account_move_data_amount"
+                android:layout_toStartOf="@+id/activity_account_move_data_amount"
+                android:layout_below="@+id/activity_account_move_data_name"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/activity_account_move_data_added"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_account_move_data_added"
+                android:layout_below="@+id/activity_account_move_data_amount"
+                android:layout_alignEnd="@+id/activity_account_move_data_amount"
+                style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                android:hint="@string/date"
+                android:gravity="center"
+                android:layout_toEndOf="@+id/activity_account_move_data_name"/>
+
+    </RelativeLayout>
+</LinearLayout>

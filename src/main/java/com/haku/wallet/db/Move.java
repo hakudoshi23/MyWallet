@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.Date;
+
 public class Move {
     public int _id;
     public int account_id;
@@ -11,7 +13,7 @@ public class Move {
     public String name;
     public String description;
     public float amount;
-    public long added;
+    public Long added;
 
     public Move() {
         this._id = 0;
@@ -20,7 +22,7 @@ public class Move {
         this.name = "default";
         this.description = null;
         this.amount = 0;
-        this.added = 0;
+        this.added = null;
     }
 
     public Move(Cursor c) {
@@ -62,6 +64,12 @@ public class Move {
     public static void delete(Context context, int id) {
         SQLUtil.getDB(context).delete("move", "_id = ?",
                 new String[]{String.valueOf(id)});
+    }
+
+    public static void apply(Context context, int id) {
+        Move m = Move.getMove(context, id);
+        m.added = (new Date()).getTime();
+        m.save(context);
     }
 
     public boolean save(Context context) {

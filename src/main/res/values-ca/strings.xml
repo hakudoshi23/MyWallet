@@ -42,4 +42,5 @@
     <string name="popup">popup</string>
     <string name="send_to">Send To</string>
     <string name="overflow">overflow</string>
+    <string name="accounts">ACOUNTS</string>
 </resources>

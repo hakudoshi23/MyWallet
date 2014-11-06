@@ -1,7 +1,8 @@
 package com.haku.wallet.account;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
@@ -10,13 +11,16 @@ import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Account;
 
-public class AccountDataActivity extends Activity {
+public class AccountDataActivity extends ActionBarActivity {
     private Account account = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_account_data);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(mToolbar);
 
         Bundle data = this.getIntent().getExtras();
         if (data != null && data.containsKey("account")) {

@@ -6,10 +6,11 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import com.avp.wallet.R;
 
 public class AccountMovesFragment extends ListFragment implements View.OnClickListener {
-    private AccountMovesAdapter adapter;
+    public AccountMovesAdapter adapter;
     private int account_id = 0;
 
     @Override
@@ -27,7 +28,7 @@ public class AccountMovesFragment extends ListFragment implements View.OnClickLi
 
     @Override
     public void onResume() {
-        adapter.update(this.getActivity(), account_id);
+        adapter.update(this.getActivity());
         super.onResume();
     }
 
@@ -40,5 +41,13 @@ public class AccountMovesFragment extends ListFragment implements View.OnClickLi
                 this.getActivity().startActivity(intent);
             }
         }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent i = new Intent(this.getActivity(), AccountMoveDataActivity.class);
+        i.putExtra("account", account_id);
+        i.putExtra("move", (int) id);
+        this.getActivity().startActivity(i);
     }
 }

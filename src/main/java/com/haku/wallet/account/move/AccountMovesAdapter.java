@@ -61,7 +61,7 @@ public class AccountMovesAdapter extends CursorAdapter {
                 cursor.getInt(cursor.getColumnIndex("_id")));
     }
 
-    public void update(Context context, int account_id) {
+    public void update(Context context) {
         this.swapCursor(Move.getMovesByAccount(context, account_id));
     }
 
@@ -88,7 +88,7 @@ public class AccountMovesAdapter extends CursorAdapter {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Move.delete(context, id);
-                                        update(context, account_id);
+                                        update(context);
                                     }
                                 });
                                 builder.setNegativeButton(android.R.string.no, null);

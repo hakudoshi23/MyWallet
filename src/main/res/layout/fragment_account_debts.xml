@@ -12,19 +12,21 @@
             android:layout_above="@+id/fragment_account_move_add"
             android:layout_alignParentTop="true"/>
 
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:id="@+id/fragment_account_move_add"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"/>
-
     <TextView
             android:id="@android:id/empty"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"
             android:textColor="#AAA"
-            android:text="@string/empty"/>
+            android:text="@string/empty"
+            android:layout_above="@+id/fragment_account_move_add"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:id="@+id/fragment_account_move_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/button"/>
 </RelativeLayout>

@@ -36,10 +36,12 @@
     <string name="clear">Clear</string>
     <string name="select_format">Select Format</string>
     <!-- TAGS -->
+    <string name="tag_delete_confirmation_title">Delete Tag?</string>
     <string name="title_activity_tag">Manage Tags</string>
     <string name="title_activity_tag_data">Tag Info</string>
     <string name="tag_data_name">Tag Name</string>
     <string name="popup">popup</string>
-    <string name="send_to">Send To</string>
+    <string name="send_to">Send To...</string>
     <string name="overflow">overflow</string>
+    <string name="accounts">ACCOUNTS</string>
 </resources>

@@ -1,38 +1,31 @@
-<LinearLayout
+<android.support.v4.app.FragmentTabHost
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_account_tab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/fragment_account_tab_host"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <android.support.v4.app.FragmentTabHost
-            android:id="@+id/fragment_account_tab_host"
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:paddingTop="48dp">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <TabWidget
+                android:id="@+id/fragment_account_tab_widget"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="48dp">
+                android:layout_height="wrap_content"
+                android:layout_weight="0"/>
 
-            <TabWidget
-                    android:id="@+id/fragment_account_tab_widget"
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"/>
+        <FrameLayout
+                android:id="@+id/fragment_account_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0"/>
 
-            <FrameLayout
-                    android:id="@+id/fragment_account_content"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0"/>
-
-            <android.support.v4.view.ViewPager
-                    android:id="@+id/fragment_account_pager"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"/>
-        </LinearLayout>
-    </android.support.v4.app.FragmentTabHost>
-</LinearLayout>
+        <android.support.v4.view.ViewPager
+                android:id="@+id/fragment_account_pager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+    </LinearLayout>
+</android.support.v4.app.FragmentTabHost>

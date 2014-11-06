@@ -1,36 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.haku.wallet.account.AccountDataActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.haku.wallet.account.AccountDataActivity">
 
-    <EditText
-            android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_height="wrap_content"
-            android:id="@+id/account_data_name"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:hint="@string/account_data_name"/>
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/account_data_amount"
-            android:layout_below="@+id/account_data_name"
-            android:layout_alignParentStart="true"
-            android:hint="@string/account_data_amount"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.haku.wallet.account.AccountDataActivity">
 
-    <Spinner
-            android:id="@+id/account_data_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/currency"
-            android:layout_below="@+id/account_data_name"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/account_data_amount"
-            android:layout_alignBottom="@+id/account_data_amount"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/account_data_name"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/account_data_name"/>
 
-</RelativeLayout>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned|numberDecimal"
+                android:ems="10"
+                android:id="@+id/account_data_amount"
+                android:layout_below="@+id/account_data_name"
+                android:layout_alignParentStart="true"
+                android:hint="@string/account_data_amount"/>
+
+        <Spinner
+                android:id="@+id/account_data_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/currency"
+                android:layout_below="@+id/account_data_name"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/account_data_amount"
+                android:layout_alignBottom="@+id/account_data_amount"/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -14,6 +14,7 @@
             android:layout_alignParentEnd="true"
             android:textSize="20sp"
             android:hint="@string/tags"
+            android:background="@drawable/button"
             android:gravity="center"/>
 
     <LinearLayout
@@ -28,14 +29,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/account_filter_from"
-                android:hint="@string/from"/>
+                android:hint="@string/from"
+                android:background="@drawable/button"/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/account_filter_to"
-                android:hint="@string/to"/>
+                android:hint="@string/to"
+                android:background="@drawable/button"/>
     </LinearLayout>
 
     <ListView
@@ -67,13 +70,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/export"/>
+                android:text="@string/export"
+                android:background="@drawable/button"/>
 
         <Button
                 android:id="@+id/account_filter_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/clear"/>
+                android:text="@string/clear"
+                android:background="@drawable/button"/>
     </LinearLayout>
 </RelativeLayout>

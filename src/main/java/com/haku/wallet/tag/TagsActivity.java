@@ -1,21 +1,33 @@
 package com.haku.wallet.tag;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import com.avp.wallet.R;
 
-public class TagsActivity extends ListActivity {
+public class TagsActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
     private TagListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.activity_tags);
+
+        ListView list = (ListView) findViewById(R.id.activity_tags_list);
         this.adapter = new TagListAdapter(this);
-        this.setListAdapter(this.adapter);
+        list.setAdapter(this.adapter);
+        list.setEmptyView(findViewById(R.id.activity_tags_empty));
+        list.setOnItemClickListener(this);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(mToolbar);
     }
 
     @Override
@@ -40,5 +52,12 @@ public class TagsActivity extends ListActivity {
     protected void onResume() {
         adapter.update(this);
         super.onResume();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i = new Intent(this, TagDataActivity.class);
+        i.putExtra("tag", (int) id);
+        this.startActivity(i);
     }
 }

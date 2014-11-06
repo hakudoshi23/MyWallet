@@ -3,7 +3,6 @@ package com.haku.wallet.account;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,22 @@ import com.haku.wallet.account.filter.AccountFilterFragment;
 import com.haku.wallet.account.move.AccountMovesFragment;
 
 public class AccountFragment extends Fragment {
+    private static TabHostPager mPagerAdapter;
+
+    public static void update(int index) {
+        Fragment f = mPagerAdapter.getItem(index);
+        f.onResume();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
         if (this.getArguments() != null && this.getArguments().containsKey("account")) {
-            ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.fragment_account_pager);
             FragmentTabHost mTabHost = (FragmentTabHost) rootView.findViewById(R.id.fragment_account_tab_host);
+            ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.fragment_account_pager);
 
-            PagerAdapter mPagerAdapter = new TabHostPager(this.getChildFragmentManager(), mViewPager, mTabHost,
+            mPagerAdapter = new TabHostPager(this.getChildFragmentManager(), mViewPager, mTabHost,
                     Fragment.instantiate(this.getActivity(), AccountMovesFragment.class.getName(), this.getArguments()),
                     Fragment.instantiate(this.getActivity(), AccountDebtsFragment.class.getName(), this.getArguments()),
                     Fragment.instantiate(this.getActivity(), AccountFilterFragment.class.getName(), this.getArguments()));

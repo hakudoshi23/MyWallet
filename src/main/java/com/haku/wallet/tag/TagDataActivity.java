@@ -1,7 +1,8 @@
 package com.haku.wallet.tag;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -11,13 +12,16 @@ import android.widget.Toast;
 import com.avp.wallet.R;
 import com.haku.wallet.db.Tag;
 
-public class TagDataActivity extends Activity {
+public class TagDataActivity extends ActionBarActivity {
     private Tag tag = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_data);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(mToolbar);
 
         Spinner spinner = (Spinner) this.findViewById(R.id.activity_tag_data_color);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

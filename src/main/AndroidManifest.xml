@@ -8,7 +8,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
         <activity
-                android:name="com.haku.wallet.SpinnerActivity"
+                android:name="com.haku.wallet.DrawerActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,7 +19,7 @@
         <activity
                 android:name="com.haku.wallet.tag.TagsActivity"
                 android:label="@string/title_activity_tag"
-                android:parentActivityName="com.haku.wallet.SpinnerActivity">
+                android:parentActivityName="com.haku.wallet.DrawerActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.haku.wallet.DrawerActivity"/>
@@ -35,7 +35,7 @@
         <activity
                 android:name="com.haku.wallet.account.AccountDataActivity"
                 android:label="@string/title_activity_account_data"
-                android:parentActivityName="com.haku.wallet.SpinnerActivity">
+                android:parentActivityName="com.haku.wallet.DrawerActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.haku.wallet.DrawerActivity"/>
@@ -43,12 +43,12 @@
         <activity
                 android:name="com.haku.wallet.account.debt.AccountDebtDataActivity"
                 android:label="@string/title_activity_account_debt_data"
-                android:parentActivityName="com.haku.wallet.SpinnerActivity">
+                android:parentActivityName="com.haku.wallet.DrawerActivity">
         </activity>
         <activity
                 android:name="com.haku.wallet.account.move.AccountMoveDataActivity"
                 android:label="@string/title_activity_account_move_data"
-                android:parentActivityName="com.haku.wallet.SpinnerActivity">
+                android:parentActivityName="com.haku.wallet.DrawerActivity">
         </activity>
     </application>
 

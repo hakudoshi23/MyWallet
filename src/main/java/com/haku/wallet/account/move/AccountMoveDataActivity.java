@@ -1,8 +1,9 @@
 package com.haku.wallet.account.move;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AccountMoveDataActivity extends Activity implements View.OnClickListener {
+public class AccountMoveDataActivity extends ActionBarActivity implements View.OnClickListener {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleCursorAdapter tagsCursor;
     private int account_id;
@@ -33,6 +34,9 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_account_move_data);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(mToolbar);
 
         this.findViewById(R.id.activity_account_move_data_added).setOnClickListener(this);
 
@@ -71,7 +75,6 @@ public class AccountMoveDataActivity extends Activity implements View.OnClickLis
             }
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
