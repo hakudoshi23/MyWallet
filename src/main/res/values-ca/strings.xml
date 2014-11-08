@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyWallet</string>
-    <string name="add">Add</string>
-    <string name="save">Save</string>
-    <string name="empty">Empty</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="name">Name</string>
-    <string name="description">Description</string>
-    <string name="amount">Amount</string>
-    <string name="date">Date</string>
-    <string name="apply">Apply</string>
-    <string name="clone">Clone</string>
-    <!-- SPINNER -->
-    <string name="add_account">Add Account</string>
-    <string name="manage_tags">Manage Tags</string>
-    <!-- ACCOUNT -->
-    <string name="title_activity_account_data">Account Info</string>
-    <string name="accounts_edit">Edit Account</string>
-    <string name="accounts_delete">Delete Account</string>
-    <string name="account_data_name">Account Name</string>
-    <string name="account_data_amount">Initial Amount</string>
-    <string name="account_delete_confirmation_title">Delete Account?</string>
-    <!-- MOVES -->
-    <string name="title_activity_account_move_data">Move Info</string>
-    <string name="move_delete_confirmation_title">Delete Move?</string>
-    <string name="empty_name">Name cannot be empty!</string>
-    <!-- DEBTS -->
-    <string name="title_activity_account_debt_data">Debt Info</string>
-    <!-- FILTER -->
-    <string name="export">Export</string>
-    <string name="tags">Tags</string>
-    <string name="from">From</string>
-    <string name="to">To</string>
-    <string name="clear">Clear</string>
-    <string name="select_format">Select Format</string>
-    <!-- TAGS -->
-    <string name="title_activity_tag">Manage Tags</string>
-    <string name="title_activity_tag_data">Tag Info</string>
-    <string name="tag_data_name">Tag Name</string>
+    <string name="save">Guarda</string>
+    <string name="edit">Edita</string>
+    <string name="name">Nom</string>
+    <string name="date">Data</string>
+    <string name="empty">Buit</string>
     <string name="popup">popup</string>
-    <string name="send_to">Send To</string>
+    <string name="clone">Clona</string>
+    <string name="apply">Aplica</string>
+    <string name="delete">Borra</string>
+    <string name="amount">Quantitat</string>
+    <string name="app_name">MyWallet</string>
     <string name="overflow">overflow</string>
-    <string name="accounts">ACOUNTS</string>
+    <string name="description">Descripció</string>
+    <!-- VALIDATION -->
+    <string name="warn_empty_name">El nom no pot estar buit!</string>
+    <!-- DRAWER -->
+    <string name="accounts">COMPTES</string>
+    <!-- ACCOUNT -->
+    <string name="account_add">Afegeix Compte</string>
+    <string name="account_info">Dades de Compte</string>
+    <string name="accounts_edit">Editar Compte</string>
+    <string name="accounts_delete">Borrar Compte</string>
+    <string name="account_data_amount">Quantitat Inicial</string>
+    <string name="account_delete_confirmation">Borrar Compte?</string>
+    <!-- MOVES -->
+    <string name="move_add">Afegeix Moviment</string>
+    <string name="move_info">Dades de Movimient</string>
+    <string name="move_delete_confirmation">Borrar Moviment?</string>
+    <!-- DEBTS -->
+    <string name="debt_add">Afegeix Deute</string>
+    <string name="debt_info">Dades de Deute</string>
+    <string name="debt_delete_confirmation">Borrar Deute?</string>
+    <!-- FILTER -->
+    <string name="to">Fins a</string>
+    <string name="tags">Etiquetes</string>
+    <string name="from">Des de</string>
+    <string name="clear">Neteja</string>
+    <string name="export">Exporta</string>
+    <string name="send_to">Envía a…</string>
+    <string name="select_format">Selecciona Format</string>
+    <!-- TAGS -->
+    <string name="manage_tags">Gestion Etiquetes</string>
+    <string name="tag_delete_confirmation_title">Borrar Etiqueta?</string>
+    <string name="title_activity_tag">Gestiona Etiquetes</string>
+    <string name="title_activity_tag_data">Dades de Etiqueta</string>
+    <string name="tag_data_name">Nom de Etiqueta</string>
+    <string name="account_data_name">Nom de Compte</string>
+    <string name="debts">Deutes</string>
+    <string name="filter">Filtre</string>
+    <string name="moves">Moviments</string>
 </resources>

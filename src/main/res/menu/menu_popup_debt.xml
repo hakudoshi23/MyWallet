@@ -1,18 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/action_delete"
-            android:icon="@android:drawable/ic_menu_delete"
+            android:icon="@drawable/ic_action_discard"
             android:title="@string/delete"/>
     <item
             android:id="@+id/action_edit"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_action_edit"
             android:title="@string/edit"/>
     <item
             android:id="@+id/action_clone"
-            android:icon="@android:drawable/ic_menu_crop"
+            android:icon="@drawable/ic_action_new"
             android:title="@string/clone"/>
     <item
             android:id="@+id/action_apply"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_action_new"
             android:title="@string/apply"/>
 </menu>

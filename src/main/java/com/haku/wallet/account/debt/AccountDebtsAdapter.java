@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.haku.wallet.util.FormatUtil;
 
 public class AccountDebtsAdapter extends CursorAdapter {
     private final int account_id;
-    private FragmentManager supportFragmentManager;
 
     public AccountDebtsAdapter(Context context, int account_id) {
         super(context, Move.getDebtsByAccount(context, account_id), true);
@@ -78,7 +76,7 @@ public class AccountDebtsAdapter extends CursorAdapter {
                                 break;
                             case R.id.action_delete:
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setTitle(R.string.move_delete_confirmation_title);
+                                builder.setTitle(R.string.debt_delete_confirmation);
                                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -109,9 +107,5 @@ public class AccountDebtsAdapter extends CursorAdapter {
                 popup.show();
             }
         });
-    }
-
-    public void setSupportFragmentManager(FragmentManager supportFragmentManager) {
-        this.supportFragmentManager = supportFragmentManager;
     }
 }

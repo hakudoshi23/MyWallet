@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="color_id">
-        <item>RED</item>
-        <item>GREEN</item>
-        <item>BLUE</item>
-        <item>BLACK</item>
-        <item>WHITE</item>
+    <array name="color_name">
+        <item>ROJO</item>
+        <item>VERDE</item>
+        <item>AZUL</item>
+        <item>NEGRO</item>
+        <item>BLANCO</item>
         <item>CYAN</item>
     </array>
     <integer-array name="color_value">

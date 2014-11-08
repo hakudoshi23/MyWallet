@@ -3,6 +3,7 @@ package com.haku.wallet.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import com.haku.wallet.DrawerActivity;
 
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class Move {
         this.name = "default";
         this.description = null;
         this.amount = 0;
-        this.added = null;
+        this.added = 0L;
     }
 
     public Move(Cursor c) {
@@ -81,6 +82,7 @@ public class Move {
         if (this.account_id > 0) values.put("account_id", this.account_id);
         if (this.tag_id > 0) values.put("tag_id", this.tag_id);
         int count;
+        Move mv = this._id > 0 ? Move.getMove(context, this._id) : null;
         if (this._id > 0) {
             count = SQLUtil.getDB(context).update("move", values, "_id = ?",
                     new String[]{String.valueOf(this._id)});
@@ -88,6 +90,25 @@ public class Move {
             long aux = SQLUtil.getDB(context).insert("move", null, values);
             count = aux > 0 ? 1 : 0;
         }
+        this.updateAmount(context, mv);
         return count == 1;
+    }
+
+    private void updateAmount(Context context, Move prev) {
+        if (prev == null) {
+            if (this.added != null && this.added > 0) {
+                Account.addAmount(context, this.account_id, this.amount);
+                DrawerActivity.adapter.update(context);
+            }
+        } else {
+            if (prev.added == 0 && this.added != null && this.added > 0) {
+                Account.addAmount(context, this.account_id, this.amount);
+                DrawerActivity.adapter.update(context);
+            } else if (this.added != null && this.added > 0) {
+                Account.addAmount(context, this.account_id,
+                        this.amount - prev.amount);
+                DrawerActivity.adapter.update(context);
+            }
+        }
     }
 }

@@ -38,6 +38,12 @@ public class Account {
                 new String[]{String.valueOf(id)});
     }
 
+    public static void addAmount(Context context, int id, float amount) {
+        Account acc = Account.getAccount(context, id);
+        acc.amount += amount;
+        acc.save(context);
+    }
+
     public boolean save(Context context) {
         ContentValues values = new ContentValues();
         values.put("name", this.name);

@@ -23,10 +23,10 @@ import com.haku.wallet.db.Account;
 import com.haku.wallet.tag.TagsActivity;
 
 public class DrawerActivity extends ActionBarActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
+    public static AccountsAdapter adapter;
     private ActionBarDrawerToggle toggle;
     private Bundle args = new Bundle();
     private DrawerLayout drawerLayout;
-    private AccountsSpinnerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +37,27 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
         this.setSupportActionBar(mToolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, R.string.add, R.string.add
+                this, drawerLayout, R.string.save, R.string.save
         );
         drawerLayout.setDrawerListener(toggle);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setHomeButtonEnabled(true);
 
         LinearLayout drawer = (LinearLayout) findViewById(R.id.drawer);
-        drawer.inflate(this, R.layout.drawer_menu, drawer);
+        LinearLayout.inflate(this, R.layout.drawer_menu, drawer);
         ListView accounts = (ListView) findViewById(R.id.drawer_account_list);
-        adapter = new AccountsSpinnerAdapter(this);
+        adapter = new AccountsAdapter(this);
         accounts.setAdapter(adapter);
         accounts.setOnItemClickListener(this);
 
-        if (this.adapter.getCount() > 0) {
-            this.setAccount((int) this.adapter.getItemId(0));
+        if (adapter.getCount() > 0) {
+            this.setAccount((int) adapter.getItemId(0));
         }
     }
 
     @Override
     protected void onResume() {
-        this.adapter.update(this);
+        adapter.update(this);
         super.onResume();
     }
 
@@ -87,7 +87,7 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
                 break;
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.account_delete_confirmation_title);
+                builder.setTitle(R.string.account_delete_confirmation);
                 builder.setPositiveButton(android.R.string.yes, this);
                 builder.setNegativeButton(android.R.string.no, null);
                 AlertDialog dialog = builder.create();
@@ -111,9 +111,9 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
     public void onClick(DialogInterface dialog, int which) {
         if (this.args.containsKey("account")) {
             Account.delete(this, this.args.getInt("account"));
-            this.adapter.update(this);
-            if (this.adapter.getCount() > 0) {
-                this.setAccount((int) this.adapter.getItemId(0));
+            adapter.update(this);
+            if (adapter.getCount() > 0) {
+                this.setAccount((int) adapter.getItemId(0));
             }
         }
     }

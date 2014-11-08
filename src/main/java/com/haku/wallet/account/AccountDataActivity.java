@@ -21,6 +21,8 @@ public class AccountDataActivity extends ActionBarActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(mToolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setIcon(R.drawable.ic_action_settings);
 
         Bundle data = this.getIntent().getExtras();
         if (data != null && data.containsKey("account")) {

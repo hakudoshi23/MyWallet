@@ -83,7 +83,7 @@ public class AccountMovesAdapter extends CursorAdapter {
                                 break;
                             case R.id.action_delete:
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setTitle(R.string.move_delete_confirmation_title);
+                                builder.setTitle(R.string.move_delete_confirmation);
                                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

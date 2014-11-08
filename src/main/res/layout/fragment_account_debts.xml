@@ -24,7 +24,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add"
+            android:text="@string/debt_add"
             android:id="@+id/fragment_account_move_add"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"

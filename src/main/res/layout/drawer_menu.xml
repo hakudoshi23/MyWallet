@@ -4,7 +4,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/background_floating_material_dark">
+                android:background="@color/bg">
 
     <TextView
             android:id="@+id/drawer_accounts"
@@ -18,7 +18,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:paddingRight="0dp"
-            android:background="@color/background_material_dark"/>
+            android:background="@color/primary_light"/>
 
     <ListView
             android:id="@+id/drawer_account_list"

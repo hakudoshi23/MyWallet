@@ -11,9 +11,9 @@ import com.avp.wallet.R;
 import com.haku.wallet.db.Account;
 import com.haku.wallet.util.FormatUtil;
 
-public class AccountsSpinnerAdapter extends CursorAdapter {
+public class AccountsAdapter extends CursorAdapter {
 
-    public AccountsSpinnerAdapter(Context context) {
+    public AccountsAdapter(Context context) {
         super(context, Account.getAccounts(context), true);
     }
 

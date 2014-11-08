@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyWallet</string>
-    <string name="add">Add</string>
     <string name="save">Save</string>
-    <string name="empty">Empty</string>
-    <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="name">Name</string>
-    <string name="description">Description</string>
-    <string name="amount">Amount</string>
     <string name="date">Date</string>
-    <string name="apply">Apply</string>
+    <string name="empty">Empty</string>
+    <string name="popup" translatable="false">popup</string>
     <string name="clone">Clone</string>
-    <!-- SPINNER -->
-    <string name="add_account">Add Account</string>
-    <string name="manage_tags">Manage Tags</string>
+    <string name="apply">Apply</string>
+    <string name="delete">Delete</string>
+    <string name="amount">Amount</string>
+    <string name="app_name" translatable="false">MyWallet</string>
+    <string name="overflow" translatable="false">overflow</string>
+    <string name="description">Description</string>
+    <!-- VALIDATION -->
+    <string name="warn_empty_name">Name cannot be empty!</string>
+    <!-- DRAWER -->
+    <string name="accounts">ACCOUNTS</string>
     <!-- ACCOUNT -->
-    <string name="title_activity_account_data">Account Info</string>
+    <string name="account_add">Add Account</string>
+    <string name="account_info">Account Data</string>
     <string name="accounts_edit">Edit Account</string>
     <string name="accounts_delete">Delete Account</string>
     <string name="account_data_name">Account Name</string>
     <string name="account_data_amount">Initial Amount</string>
-    <string name="account_delete_confirmation_title">Delete Account?</string>
+    <string name="account_delete_confirmation">Delete Account?</string>
     <!-- MOVES -->
-    <string name="title_activity_account_move_data">Move Info</string>
-    <string name="move_delete_confirmation_title">Delete Move?</string>
-    <string name="empty_name">Name cannot be empty!</string>
+    <string name="moves">MOVES</string>
+    <string name="move_add">Add Move</string>
+    <string name="move_info">Move Data</string>
+    <string name="move_delete_confirmation">Delete Move?</string>
     <!-- DEBTS -->
-    <string name="title_activity_account_debt_data">Debt Info</string>
+    <string name="debts">DEBTS</string>
+    <string name="debt_add">Add Debt</string>
+    <string name="debt_info">Debt Data</string>
+    <string name="debt_delete_confirmation">Delete Debt?</string>
     <!-- FILTER -->
-    <string name="export">Export</string>
+    <string name="filter">FILTER</string>
+    <string name="to">To</string>
     <string name="tags">Tags</string>
     <string name="from">From</string>
-    <string name="to">To</string>
     <string name="clear">Clear</string>
+    <string name="export">Export</string>
+    <string name="send_to">Send To…</string>
     <string name="select_format">Select Format</string>
     <!-- TAGS -->
+    <string name="manage_tags">Manage Tags</string>
     <string name="tag_delete_confirmation_title">Delete Tag?</string>
     <string name="title_activity_tag">Manage Tags</string>
-    <string name="title_activity_tag_data">Tag Info</string>
+    <string name="title_activity_tag_data">Tag Data</string>
     <string name="tag_data_name">Tag Name</string>
-    <string name="popup">popup</string>
-    <string name="send_to">Send To...</string>
-    <string name="overflow">overflow</string>
-    <string name="accounts">ACCOUNTS</string>
 </resources>

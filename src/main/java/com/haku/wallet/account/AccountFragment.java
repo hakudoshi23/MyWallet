@@ -35,9 +35,12 @@ public class AccountFragment extends Fragment {
             mViewPager.setAdapter(mPagerAdapter);
 
             mTabHost.setup(this.getActivity(), this.getChildFragmentManager(), R.id.fragment_account_content);
-            mTabHost.addTab(mTabHost.newTabSpec("moves").setIndicator("Moves"), AccountMovesFragment.class, this.getArguments());
-            mTabHost.addTab(mTabHost.newTabSpec("debts").setIndicator("Debts"), AccountDebtsFragment.class, this.getArguments());
-            mTabHost.addTab(mTabHost.newTabSpec("filter").setIndicator("Filter"), AccountFilterFragment.class, this.getArguments());
+            mTabHost.addTab(mTabHost.newTabSpec("moves").setIndicator(this.getActivity().getText(R.string.moves)),
+                    AccountMovesFragment.class, this.getArguments());
+            mTabHost.addTab(mTabHost.newTabSpec("debts").setIndicator(this.getActivity().getText(R.string.debts)),
+                    AccountDebtsFragment.class, this.getArguments());
+            mTabHost.addTab(mTabHost.newTabSpec("filter").setIndicator(this.getActivity().getText(R.string.filter)),
+                    AccountFilterFragment.class, this.getArguments());
         }
 
         return rootView;

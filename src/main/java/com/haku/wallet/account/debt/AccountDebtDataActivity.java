@@ -32,6 +32,8 @@ public class AccountDebtDataActivity extends ActionBarActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(mToolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setIcon(R.drawable.ic_action_settings);
 
         this.findViewById(R.id.activity_account_move_data_added).setVisibility(View.INVISIBLE);
 
@@ -80,7 +82,7 @@ public class AccountDebtDataActivity extends ActionBarActivity {
         int id = item.getItemId();
         if (id == R.id.action_save) {
             if (nameView.length() == 0) {
-                Toast.makeText(this, this.getString(R.string.empty_name), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getString(R.string.warn_empty_name), Toast.LENGTH_LONG).show();
             } else {
                 if (this.move == null) this.move = new Move();
                 this.move.name = nameView.getText().toString();
