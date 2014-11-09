@@ -9,11 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.avp.wallet.R;
@@ -80,7 +78,25 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
         Intent intent = null;
         switch (item.getItemId()) {
             case R.id.action_add:
-                intent = new Intent(this, AccountDataActivity.class);
+                //intent = new Intent(this, AccountDataActivity.class);
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View layout = inflater.inflate(R.layout.activity_account_data, null);
+                AlertDialog.Builder bui = new AlertDialog.Builder(this);
+                bui.setView(layout);
+                bui.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                bui.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dia = bui.create();
+                dia.show();
                 break;
             case R.id.action_tags:
                 intent = new Intent(this, TagsActivity.class);
