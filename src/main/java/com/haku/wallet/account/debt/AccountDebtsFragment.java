@@ -20,7 +20,7 @@ public class AccountDebtsFragment extends ListFragment implements View.OnClickLi
             rootView.findViewById(R.id.fragment_account_move_add).setOnClickListener(this);
             this.account_id = this.getArguments().getInt("account");
             this.adapter = new AccountDebtsAdapter(this.getActivity(), this.account_id);
-            this.adapter.setSupportFragmentManager(this.getActivity().getSupportFragmentManager());
+            //this.adapter.setSupportFragmentManager(this.getActivity().getSupportFragmentManager());
             this.setListAdapter(this.adapter);
         }
         this.setHasOptionsMenu(true);

@@ -5,13 +5,10 @@
     <string name="name">Nom</string>
     <string name="date">Data</string>
     <string name="empty">Buit</string>
-    <string name="popup">popup</string>
     <string name="clone">Clona</string>
     <string name="apply">Aplica</string>
     <string name="delete">Borra</string>
     <string name="amount">Quantitat</string>
-    <string name="app_name">MyWallet</string>
-    <string name="overflow">overflow</string>
     <string name="description">Descripció</string>
     <!-- VALIDATION -->
     <string name="warn_empty_name">El nom no pot estar buit!</string>

@@ -29,7 +29,6 @@ public class TagsActivity extends ActionBarActivity implements AdapterView.OnIte
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(mToolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setIcon(R.drawable.ic_action_settings);
     }
 
     @Override

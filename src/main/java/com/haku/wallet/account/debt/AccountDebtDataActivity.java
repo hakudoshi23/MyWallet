@@ -33,7 +33,6 @@ public class AccountDebtDataActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(mToolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setIcon(R.drawable.ic_action_settings);
 
         this.findViewById(R.id.activity_account_move_data_added).setVisibility(View.INVISIBLE);
 

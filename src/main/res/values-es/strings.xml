@@ -5,13 +5,10 @@
     <string name="name">Nombre</string>
     <string name="date">Fecha</string>
     <string name="empty">Vacío</string>
-    <string name="popup">popup</string>
     <string name="clone">Clona</string>
     <string name="apply">Aplica</string>
     <string name="delete">Borra</string>
     <string name="amount">Cantidad</string>
-    <string name="app_name">MyWallet</string>
-    <string name="overflow">overflow</string>
     <string name="description">Descripción</string>
     <!-- VALIDATION -->
     <string name="warn_empty_name">El nombre no puede estar vacío!</string>

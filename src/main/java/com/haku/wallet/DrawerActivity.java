@@ -10,12 +10,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.*;
 import com.avp.wallet.R;
-import com.haku.wallet.account.AccountDataActivity;
 import com.haku.wallet.account.AccountFragment;
 import com.haku.wallet.db.Account;
 import com.haku.wallet.tag.TagsActivity;
@@ -25,6 +21,8 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
     private ActionBarDrawerToggle toggle;
     private Bundle args = new Bundle();
     private DrawerLayout drawerLayout;
+
+    private Account account = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,42 +74,55 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) return true;
         Intent intent = null;
+        AlertDialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.activity_account_data, null);
         switch (item.getItemId()) {
             case R.id.action_add:
-                //intent = new Intent(this, AccountDataActivity.class);
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                View layout = inflater.inflate(R.layout.activity_account_data, null);
-                AlertDialog.Builder bui = new AlertDialog.Builder(this);
-                bui.setView(layout);
-                bui.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                builder.setTitle(R.string.account_add);
+                builder.setView(layout);
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        DrawerActivity.this.saveAccount(layout);
                     }
                 });
-                bui.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog dia = bui.create();
-                dia.show();
+                builder.setNegativeButton(android.R.string.no, null);
+                dialog = builder.create();
+                dialog.show();
                 break;
             case R.id.action_tags:
                 intent = new Intent(this, TagsActivity.class);
                 break;
             case R.id.action_delete:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.account_delete_confirmation);
                 builder.setPositiveButton(android.R.string.yes, this);
-                builder.setNegativeButton(android.R.string.no, null);
-                AlertDialog dialog = builder.create();
+                dialog = builder.create();
                 dialog.show();
                 break;
             case R.id.action_edit:
-                intent = new Intent(this, AccountDataActivity.class);
-                intent.putExtras(this.args);
+                EditText nameView = (EditText) layout.findViewById(R.id.account_data_name);
+                EditText amountView = (EditText) layout.findViewById(R.id.account_data_amount);
+                Spinner currencyView = (Spinner) layout.findViewById(R.id.account_data_currency);
+                nameView.setText(account.name);
+                amountView.setText(String.valueOf(account.amount));
+                String[] currencies = this.getResources().getStringArray(R.array.currency);
+                for (int i = 0; i < currencies.length; i++) {
+                    if (this.account.currency.equals(currencies[i])) currencyView.setSelection(i);
+                }
+                builder.setTitle(R.string.account_add);
+                builder.setView(layout);
+                this.account = Account.getAccount(this, this.args.getInt("account"));
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DrawerActivity.this.saveAccount(layout);
+                    }
+                });
+                builder.setNegativeButton(android.R.string.no, null);
+                dialog = builder.create();
+                dialog.show();
                 break;
         }
         if (intent != null) this.startActivity(intent);
@@ -130,6 +141,26 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
             adapter.update(this);
             if (adapter.getCount() > 0) {
                 this.setAccount((int) adapter.getItemId(0));
+            }
+        }
+    }
+
+    private void saveAccount(View root) {
+        EditText nameView = (EditText) root.findViewById(R.id.account_data_name);
+        EditText amountView = (EditText) root.findViewById(R.id.account_data_amount);
+        Spinner currencyView = (Spinner) root.findViewById(R.id.account_data_currency);
+        if (account == null) account = new Account();
+        account.name = nameView.getText().toString();
+        if (account.name.equals("")) {
+            Toast.makeText(DrawerActivity.this, R.string.warn_empty_name, Toast.LENGTH_LONG).show();
+        } else {
+            account.currency = currencyView.getSelectedItem().toString();
+            String amount = amountView.getText().toString();
+            account.amount = Float.parseFloat(amount.equals("") ? "0" : amount);
+            if (account.save(DrawerActivity.this)) {
+                DrawerActivity.adapter.update(DrawerActivity.this);
+            } else {
+                Toast.makeText(DrawerActivity.this, "Error: insert", Toast.LENGTH_LONG).show();
             }
         }
     }

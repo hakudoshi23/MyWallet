@@ -23,7 +23,6 @@ public class TagDataActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(mToolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setIcon(R.drawable.ic_action_settings);
 
         Spinner spinner = (Spinner) this.findViewById(R.id.activity_tag_data_color);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
