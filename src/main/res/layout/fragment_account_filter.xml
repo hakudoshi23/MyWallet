@@ -12,10 +12,11 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:textSize="20sp"
             android:hint="@string/tags"
             android:background="@drawable/button"
-            android:gravity="center"/>
+            android:layout_margin="1dp"
+            android:textColor="@color/primary"
+            style="@style/button_text"/>
 
     <LinearLayout
             android:id="@+id/filter"
@@ -30,7 +31,9 @@
                 android:layout_weight="1"
                 android:id="@+id/account_filter_from"
                 android:hint="@string/from"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"
+                android:layout_margin="1dp"
+                style="@style/button_text"/>
 
         <Button
                 android:layout_width="wrap_content"
@@ -38,7 +41,10 @@
                 android:layout_weight="1"
                 android:id="@+id/account_filter_to"
                 android:hint="@string/to"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"
+                android:layout_margin="1dp"
+                android:textColor="@color/primary"
+                style="@style/button_text"/>
     </LinearLayout>
 
     <ListView
@@ -71,7 +77,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/export"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"
+                android:layout_margin="1dp"
+                style="@style/button_text"/>
 
         <Button
                 android:id="@+id/account_filter_clear"
@@ -79,6 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/clear"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"
+                android:layout_margin="1dp"
+                style="@style/button_text"/>
     </LinearLayout>
 </RelativeLayout>

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.db.Tag;
 import com.haku.wallet.util.ExportUtil;
 import com.haku.wallet.util.StringUtil;

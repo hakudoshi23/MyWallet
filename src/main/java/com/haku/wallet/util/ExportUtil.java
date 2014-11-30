@@ -3,7 +3,7 @@ package com.haku.wallet.util;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

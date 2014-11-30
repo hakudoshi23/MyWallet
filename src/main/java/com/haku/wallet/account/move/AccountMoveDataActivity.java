@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.db.Move;
 import com.haku.wallet.db.Tag;
 

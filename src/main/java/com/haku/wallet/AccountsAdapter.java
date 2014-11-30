@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import com.avp.wallet.R;
 import com.haku.wallet.db.Account;
 import com.haku.wallet.util.FormatUtil;
 

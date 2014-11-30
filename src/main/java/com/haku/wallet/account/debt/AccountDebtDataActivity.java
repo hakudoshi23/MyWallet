@@ -10,7 +10,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.db.Move;
 import com.haku.wallet.db.Tag;
 

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 
 public class AccountDebtsFragment extends ListFragment implements View.OnClickListener {
     private AccountDebtsAdapter adapter;

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.db.Tag;
 
 public class TagDataActivity extends ActionBarActivity {

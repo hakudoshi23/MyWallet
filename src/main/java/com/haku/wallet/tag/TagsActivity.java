@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 
 public class TagsActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
     private TagListAdapter adapter;

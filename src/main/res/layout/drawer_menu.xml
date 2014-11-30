@@ -18,7 +18,8 @@
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:paddingRight="0dp"
-            android:background="@color/primary_light"/>
+            android:background="@color/primary_light"
+            android:textColor="#FFFFFF"/>
 
     <ListView
             android:id="@+id/drawer_account_list"

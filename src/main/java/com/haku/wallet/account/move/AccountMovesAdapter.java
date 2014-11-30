@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.db.Move;
 import com.haku.wallet.util.FormatUtil;
 

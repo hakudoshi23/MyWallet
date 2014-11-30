@@ -5,7 +5,7 @@ CREATE TABLE account (
   currency TEXT NOT NULL,
   amount REAL NOT NULL DEFAULT '0'
 );
-INSERT INTO account VALUES (1,'Wallet','€',56.48),(2,'Desk','€',602.5);
+INSERT INTO account VALUES (1,'Wallet','€',5);
 
 DROP TABLE IF EXISTS move;
 CREATE TABLE move (
@@ -19,9 +19,8 @@ CREATE TABLE move (
   FOREIGN KEY (account_id) REFERENCES account (_id) ON DELETE CASCADE,
   FOREIGN KEY (tag_id) REFERENCES tag (_id) ON DELETE SET NULL
 );
-INSERT INTO move VALUES (1,1,1,'Cocktail','Party hard!',-5.5,1413833899000),(2,2,3,'MasMobil','Phone contract',-6.05,1413833899000),
-    (3,1,2,'Because','Weekend junk food',12.64,1413833899000),(4,2,3,'T-Jove','Train card for the next 3 months',-105,1413833899000),
-    (5,1,3,'MasMobil','Phone contract',-6.05, NULL),(6,2,3,'T-Jove','Train card for the next 3 months',-105, NULL);
+INSERT INTO move VALUES (1,1,1,'Example Move','This is an example of an account move!',10,1413833899000),
+(2,1,2,'Filters','Use the filter tab to filter moves by tag / date!',-5,1413833899000);
 
 DROP TABLE IF EXISTS tag;
 CREATE TABLE tag (
@@ -29,4 +28,4 @@ CREATE TABLE tag (
   color INTEGER NOT NULL,
   name TEXT NOT NULL
 );
-INSERT INTO tag VALUES (1,-65536,'Drinks'),(2,-16711936,'Food'),(3,-16776961,'Stuff');
+INSERT INTO tag VALUES (1,-65536,'Food'),(2,-16711936,'Party'),(3,-16776961,'Other');

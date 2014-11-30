@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.avp.wallet.R;
+import com.haku.wallet.R;
 import com.haku.wallet.account.debt.AccountDebtsFragment;
 import com.haku.wallet.account.filter.AccountFilterFragment;
 import com.haku.wallet.account.move.AccountMovesFragment;

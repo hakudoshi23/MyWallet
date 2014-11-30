@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
-import com.avp.wallet.R;
 import com.haku.wallet.account.AccountFragment;
 import com.haku.wallet.db.Account;
 import com.haku.wallet.tag.TagsActivity;
@@ -171,5 +170,6 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
         f.setArguments(args);
         this.getSupportFragmentManager().beginTransaction().replace(R.id.content, f).commit();
         this.drawerLayout.closeDrawers();
+        this.account = Account.getAccount(this, id);
     }
 }
