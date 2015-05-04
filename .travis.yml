@@ -12,6 +12,8 @@ android:
     - android-sdk-license-5be876d5
     - '.*intel.+'
 before_script:
+  - "echo $JAVA_OPTS"
+  - "export JAVA_OPTS=-Xmx512m"
   - chmod +x gradlew
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
