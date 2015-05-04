@@ -1,24 +1,39 @@
 language: android
+
 jdk:
   - oraclejdk7
   - openjdk7
-env:
-  matrix:
-    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+
 android:
   components:
-    - build-tools-21.0.2
-  licenses:
-    - android-sdk-license-5be876d5
-    - '.*intel.+'
-before_script:
-  - "echo $JAVA_OPTS"
-  - "export JAVA_OPTS=-Xmx512m"
-  - chmod +x gradlew
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - adb wait-for-device
-  - adb shell input keyevent 82 &
+    # All the build system components should be at the latest version
+    - tools
+    - platform-tools
+    - build-tools-21.1.1
+    - android-21
+
+    # The libraries we can't get from Maven Central or similar
+    - extra-android-support
+    - extra-android-m2repository
+
+before_install:
+  # Disable services enabled by default
+  # http://docs.travis-ci.com/user/database-setup/#MySQL
+  - sudo /etc/init.d/mysql stop
+  - sudo /etc/init.d/postgresql stop
+  # The following did not work reliable
+  # - sudo service mysql stop
+  # - sudo service postgresql stop
+
+install:
+  # Ensure Gradle wrapper is executable, download wrapper and show version
+  - chmod +x ./gradlew; ls -l gradlew; ./gradlew wrapper -v
+  # Download and show android dependencies
+  # - ./gradlew androidDependencies
+
+before_script:        
+  # Ensure signing configuration is present
+  - mv app/gradle.properties.example app/gradle.properties
+
 script:
-  - ./gradlew build
-  - ./gradlew connectedAndroidTest
+  - ./gradlew clean assembleDebug
