@@ -33,7 +33,7 @@ install:
 
 before_script:        
   # Ensure signing configuration is present
-  - mv app/gradle.properties.example app/gradle.properties
+  # - mv app/gradle.properties.example app/gradle.properties
 
 script:
   - ./gradlew clean assembleDebug
