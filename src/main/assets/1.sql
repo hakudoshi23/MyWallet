@@ -28,4 +28,4 @@ CREATE TABLE tag (
   color INTEGER NOT NULL,
   name TEXT NOT NULL
 );
-INSERT INTO tag VALUES (1,-65536,'Food'),(2,-16711936,'Party'),(3,-16776961,'Other');
+INSERT INTO tag VALUES (1,-3407872,'Food'),(2,-16738048,'Party'),(3,-16754253,'Other');

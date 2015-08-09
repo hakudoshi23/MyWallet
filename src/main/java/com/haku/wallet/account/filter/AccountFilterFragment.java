@@ -42,7 +42,7 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
             this.ids = Tag.getTagsIds(this.getActivity());
             this.checked = new boolean[this.names.length];
 
-            this.tags = (Button) rootView.findViewById(R.id.account_list_item_desc);
+            this.tags = (Button) rootView.findViewById(R.id.account_filter_tags);
             this.tags.setOnClickListener(this);
             this.from = (Button) rootView.findViewById(R.id.account_filter_from);
             this.from.setOnClickListener(this);
@@ -62,7 +62,7 @@ public class AccountFilterFragment extends ListFragment implements View.OnClickL
         AlertDialog.Builder builder;
         Calendar c = Calendar.getInstance();
         switch (v.getId()) {
-            case R.id.account_list_item_desc:
+            case R.id.account_filter_tags:
                 builder = new AlertDialog.Builder(this.getActivity());
                 builder.setTitle(R.string.title_activity_tag)
                         .setMultiChoiceItems(this.names, this.checked,

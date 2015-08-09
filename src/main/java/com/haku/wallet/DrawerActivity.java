@@ -97,6 +97,7 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
             case R.id.action_delete:
                 builder.setTitle(R.string.account_delete_confirmation);
                 builder.setPositiveButton(android.R.string.yes, this);
+                builder.setNegativeButton(android.R.string.no, null);
                 dialog = builder.create();
                 dialog.show();
                 break;
@@ -116,7 +117,7 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DrawerActivity.this.saveAccount(layout);
+                        DrawerActivity.this.editAccount(layout);
                     }
                 });
                 builder.setNegativeButton(android.R.string.no, null);
@@ -148,7 +149,7 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
         EditText nameView = (EditText) root.findViewById(R.id.account_data_name);
         EditText amountView = (EditText) root.findViewById(R.id.account_data_amount);
         Spinner currencyView = (Spinner) root.findViewById(R.id.account_data_currency);
-        if (account == null) account = new Account();
+        Account account = new Account();
         account.name = nameView.getText().toString();
         if (account.name.equals("")) {
             Toast.makeText(DrawerActivity.this, R.string.warn_empty_name, Toast.LENGTH_LONG).show();
@@ -160,6 +161,27 @@ public class DrawerActivity extends ActionBarActivity implements AdapterView.OnI
                 DrawerActivity.adapter.update(DrawerActivity.this);
             } else {
                 Toast.makeText(DrawerActivity.this, "Error: insert", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void editAccount(View root) {
+        if (account != null) {
+            EditText nameView = (EditText) root.findViewById(R.id.account_data_name);
+            EditText amountView = (EditText) root.findViewById(R.id.account_data_amount);
+            Spinner currencyView = (Spinner) root.findViewById(R.id.account_data_currency);
+            account.name = nameView.getText().toString();
+            if (account.name.equals("")) {
+                Toast.makeText(DrawerActivity.this, R.string.warn_empty_name, Toast.LENGTH_LONG).show();
+            } else {
+                account.currency = currencyView.getSelectedItem().toString();
+                String amount = amountView.getText().toString();
+                account.amount = Float.parseFloat(amount.equals("") ? "0" : amount);
+                if (account.save(DrawerActivity.this)) {
+                    DrawerActivity.adapter.update(DrawerActivity.this);
+                } else {
+                    Toast.makeText(DrawerActivity.this, "Error: insert", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

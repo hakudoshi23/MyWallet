@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bg">#FFFFFF</color>
-    <color name="primary">#002699</color>
-    <color name="primary_light">#668CFF</color>
-    <color name="primary_lighter">#99B3FF</color>
+    <color name="primary">#002080</color>
+    <color name="primary_light">#3366FF</color>
+    <color name="primary_lighter">#809FFF</color>
+
+    <array name="color_values">
+        <item>#CC0000</item>
+        <item>#009900</item>
+        <item>#0059B3</item>
+        <item>#000000</item>
+        <item>#FFFFFF</item>
+        <item>#00B8E6</item>
+    </array>
 </resources>

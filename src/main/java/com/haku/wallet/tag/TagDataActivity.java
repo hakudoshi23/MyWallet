@@ -25,8 +25,7 @@ public class TagDataActivity extends ActionBarActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Spinner spinner = (Spinner) this.findViewById(R.id.activity_tag_data_color);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.color_name, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = new TagSpinnerAdapter(this);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -51,7 +50,7 @@ public class TagDataActivity extends ActionBarActivity {
         if (id == R.id.action_save) {
             TextView nameView = (TextView) this.findViewById(R.id.activity_tag_data_name);
             Spinner colorView = (Spinner) this.findViewById(R.id.activity_tag_data_color);
-            int[] color_values = this.getResources().getIntArray(R.array.color_value);
+            int[] color_values = this.getResources().getIntArray(R.array.color_values);
             int color = color_values[colorView.getSelectedItemPosition()];
             if (this.tag == null) this.tag = new Tag();
             this.tag.name = nameView.getText().toString();
@@ -68,7 +67,7 @@ public class TagDataActivity extends ActionBarActivity {
 
     private int getColorIndex(int color) {
         int index = 0;
-        int[] colors = this.getResources().getIntArray(R.array.color_value);
+        int[] colors = this.getResources().getIntArray(R.array.color_values);
         for (int i = 0; i < colors.length; i++) {
             if (colors[i] == color) {
                 index = i;

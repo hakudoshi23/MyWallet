@@ -6,7 +6,7 @@
                 android:layout_height="match_parent">
 
     <Button
-            android:id="@+id/account_list_item_desc"
+            android:id="@+id/account_filter_tags"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -15,14 +15,13 @@
             android:hint="@string/tags"
             android:background="@drawable/button"
             android:layout_margin="1dp"
-            android:textColor="@color/primary"
             style="@style/button_text"/>
 
     <LinearLayout
             android:id="@+id/filter"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/account_list_item_desc"
+            android:layout_below="@+id/account_filter_tags"
             android:weightSum="2">
 
         <Button
@@ -43,7 +42,6 @@
                 android:hint="@string/to"
                 android:background="@drawable/button"
                 android:layout_margin="1dp"
-                android:textColor="@color/primary"
                 style="@style/button_text"/>
     </LinearLayout>
 
